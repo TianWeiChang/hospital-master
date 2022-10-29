@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description 项目启动类
  * @createTime 2022年09月16日 16:24
  *
- *  admin 123456
+ *  系统登录超级管理员账号：admin 123456
  */
 @SpringBootApplication
 public class Application {

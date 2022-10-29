@@ -4,7 +4,11 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="外网挂号（手机验证码登录）完成">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospital-master.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/Application.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +70,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="H:/网络参考项目/mall-master/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -523,6 +527,7 @@
       <workItem from="1666837892712" duration="21145000" />
       <workItem from="1666922498440" duration="20234000" />
       <workItem from="1667002556285" duration="3762000" />
+      <workItem from="1667013522638" duration="281000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
