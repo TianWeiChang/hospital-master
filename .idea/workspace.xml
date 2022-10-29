@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hospital-master.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hospital-master.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hospital-master.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -525,7 +525,7 @@
       <workItem from="1666837892712" duration="21145000" />
       <workItem from="1666922498440" duration="20234000" />
       <workItem from="1667002556285" duration="3762000" />
-      <workItem from="1667013522638" duration="917000" />
+      <workItem from="1667013522638" duration="968000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -576,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667013826729</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="数据库表脚本">
+      <created>1667018259937</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667018259937</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +611,8 @@
     <MESSAGE value="患者库完成" />
     <MESSAGE value="外网挂号（手机验证码登录）完成" />
     <MESSAGE value="系统登录超级管理员账号" />
-    <option name="LAST_COMMIT_MESSAGE" value="系统登录超级管理员账号" />
+    <MESSAGE value="数据库表脚本" />
+    <option name="LAST_COMMIT_MESSAGE" value="数据库表脚本" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
