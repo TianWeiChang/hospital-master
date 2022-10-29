@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.RegisterTypeInfoMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.RegisterTypeInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="register_type_Name" property="registerTypeName" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from register_type_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.tian.entity.RegisterTypeInfo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into register_type_info (register_type_Name, price, operation_user_id,
+        `status`, create_time, update_time
+        )
+        values (#{registerTypeName,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{operationUserId,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.RegisterTypeInfo">
+        update register_type_info
+        set register_type_Name = #{registerTypeName,jdbcType=VARCHAR},
+        price = #{price,jdbcType=INTEGER},
+        operation_user_id = #{operationUserId,jdbcType=INTEGER},
+        <if test="status!=null">
+            `status` = #{status,jdbcType=INTEGER},
+        </if>
+        <if test="createTime!=null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, register_type_Name, price, operation_user_id, `status`, create_time, update_time
+    from register_type_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, register_type_Name, price, operation_user_id, `status`, create_time, update_time
+    from register_type_info where`status` = 0
+      <if test="registerTypeName!=null">
+       and register_type_Name=#{registerTypeName,jdbcType=VARCHAR}
+      </if>
+        <if test="id!=null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+  </select>
+
+    <select id="count" resultType="int">
+        select count(1) from register_type_info where register_type_Name=#{registerTypeName,jdbcType=VARCHAR} and `status` = 0
+    </select>
+</mapper>

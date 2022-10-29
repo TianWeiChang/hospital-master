@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.PrescriptionPricingMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.entity.PrescriptionPricing" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="drug_name" property="drugName" jdbcType="VARCHAR" />
+    <result column="patient_register_id" property="patientRegisterId" jdbcType="INTEGER" />
+    <result column="drug_count" property="drugCount" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="payment_status" property="paymentStatus" jdbcType="INTEGER" />
+    <result column="inspect_status" property="inspectStatus" jdbcType="INTEGER" />
+    <result column="inspect_instructions" property="inspectInstructions" jdbcType="VARCHAR" />
+    <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.tian.entity.PrescriptionPricing" >
+     update prescription_pricing
+    set
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      `status` = 1,
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where  id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tian.entity.PrescriptionPricing" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into prescription_pricing (drug_name, patient_register_id, drug_count, 
+      price, total,inspect_status,inspect_instructions, payment_status, `type`,
+      operation_user_id, `status`, create_time, 
+      update_time)
+    values (#{drugName,jdbcType=VARCHAR}, #{patientRegisterId,jdbcType=INTEGER}, #{drugCount,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{total,jdbcType=INTEGER}, #{inspectStatus,jdbcType=INTEGER},#{inspectInstructions,jdbcType=VARCHAR}, #{paymentStatus,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+    #{operationUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.PrescriptionPricing" >
+    update prescription_pricing
+    set drug_name = #{drugName,jdbcType=VARCHAR},
+      patient_register_id = #{patientRegisterId,jdbcType=INTEGER},
+      inspect_instructions = #{inspectInstructions,jdbcType=VARCHAR},
+      drug_count = #{drugCount,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      total = #{total,jdbcType=INTEGER},
+      payment_status = #{paymentStatus,jdbcType=INTEGER},
+      inspect_status = #{inspectStatus,jdbcType=INTEGER},
+      `type`= #{type,jdbcType=INTEGER},
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, drug_name, patient_register_id, drug_count, price, total,inspect_status,inspect_instructions, payment_status,  `type`,
+    operation_user_id, `status`, create_time, update_time
+    from prescription_pricing
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryCountByDrugId" resultType="java.lang.Integer">
+    select count(1)
+    from prescription_pricing
+    where patient_register_id = #{patientRegisterId,jdbcType=INTEGER}
+     and drug_name = #{drugName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryCountInspect" resultType="java.lang.Integer">
+    select count(1)
+    from prescription_pricing
+    where patient_register_id = #{patientRegisterId,jdbcType=INTEGER}
+     AND `type` = #{type,jdbcType=INTEGER}
+     AND inspect_status = #{inspectStatus,jdbcType=INTEGER}
+  </select>
+
+  <select id="querySumByType" resultType="java.lang.Integer">
+    select sum(total)
+    from prescription_pricing
+    where patient_register_id = #{patientRegisterId,jdbcType=INTEGER}
+    <if test="type!=null">
+      and `type` = #{type,jdbcType=INTEGER}
+    </if>
+     <if test="paymentStatus!=null">
+       AND payment_status = #{paymentStatus,jdbcType=INTEGER}
+     </if>
+  </select>
+
+  <update id="payByType">
+    update prescription_pricing
+    set payment_status = 1
+    where patient_register_id = #{patientRegisterId,jdbcType=INTEGER}
+     and `type` = #{type,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, drug_name, patient_register_id, drug_count, price, total,inspect_status, inspect_instructions,payment_status,  `type`,
+    operation_user_id, `status`, create_time, update_time
+    from prescription_pricing
+    where `status` = 0
+    <if test="type!=null">
+      AND `type` = #{type,jdbcType=INTEGER}
+    </if>
+    <if test="patientRegisterId!=null">
+      AND patient_register_id = #{patientRegisterId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectByRegisterId" resultMap="BaseResultMap">
+    select id, drug_name, patient_register_id, drug_count, price, total,inspect_status,inspect_instructions, payment_status,
+    operation_user_id, `status`, create_time, update_time
+    from prescription_pricing
+    where `status` = 0
+    and patient_register_id = #{patientRegisterId,jdbcType=INTEGER} and drug_name = #{drugName,jdbcType=VARCHAR}
+  </select>
+</mapper>

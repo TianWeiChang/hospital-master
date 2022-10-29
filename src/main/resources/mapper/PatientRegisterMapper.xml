@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.PatientRegisterMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.PatientRegister">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="patient_id" property="patientId" jdbcType="INTEGER"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="pathogeny" property="pathogeny" jdbcType="VARCHAR"/>
+        <result column="inspect_instructions" property="inspectInstructions" jdbcType="VARCHAR"/>
+        <result column="doctor_id" property="doctorId" jdbcType="INTEGER"/>
+        <result column="department_id" property="departmentId" jdbcType="INTEGER"/>
+        <result column="register_type_id" property="registerTypeId" jdbcType="INTEGER"/>
+        <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from patient_register
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.tian.entity.PatientRegister">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into patient_register (patient_id,patient_name,pathogeny,inspect_instructions, doctor_id, department_id,
+        register_type_id, operation_user_id, `status`,
+        create_time, update_time)
+        values (#{patientId,jdbcType=INTEGER},#{patientName,jdbcType=VARCHAR},#{pathogeny,jdbcType=VARCHAR}, #{inspectInstructions,jdbcType=VARCHAR},  #{doctorId,jdbcType=INTEGER},
+        #{departmentId,jdbcType=INTEGER},
+        #{registerTypeId,jdbcType=INTEGER}, #{operationUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.PatientRegister">
+        update patient_register
+        set patient_id = #{patientId,jdbcType=INTEGER},
+        patient_name = #{patientName,jdbcType=VARCHAR},
+        pathogeny = #{pathogeny,jdbcType=VARCHAR},
+        inspect_instructions = #{inspectInstructions,jdbcType=VARCHAR},
+        doctor_id = #{doctorId,jdbcType=INTEGER},
+        department_id = #{departmentId,jdbcType=INTEGER},
+        register_type_id = #{registerTypeId,jdbcType=INTEGER},
+        operation_user_id = #{operationUserId,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        <if test="pathogeny!=null">
+            , pathogeny = #{pathogeny,jdbcType=VARCHAR}
+        </if>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, patient_id,patient_name, pathogeny,inspect_instructions, doctor_id, department_id, register_type_id, operation_user_id,
+    `status`, create_time, update_time
+    from patient_register
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, patient_id, patient_name,pathogeny,inspect_instructions, doctor_id, department_id, register_type_id, operation_user_id,
+        `status`, create_time, update_time
+        from patient_register
+        where `status` = 0
+        <if test="patientName!=null">
+            and patient_name = #{patientName,jdbcType=VARCHAR}
+        </if>
+        <if test="date ==2">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+        </if>
+        <if test="date ==3">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+        </if>
+    </select>
+</mapper>

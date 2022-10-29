@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.ChargeTypeInfoMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.ChargeTypeInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="ratio" property="ratio" jdbcType="INTEGER"/>
+        <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from charge_type_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.tian.entity.ChargeTypeInfo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into charge_type_info (type_name, ratio, operation_user_id,
+        `status`, create_time, update_time
+        )
+        values (#{typeName,jdbcType=VARCHAR}, #{ratio,jdbcType=INTEGER}, #{operationUserId,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.ChargeTypeInfo">
+    update charge_type_info
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      ratio = #{ratio,jdbcType=INTEGER},
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, type_name, ratio, operation_user_id, `status`, create_time, update_time
+    from charge_type_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, type_name, ratio, operation_user_id, `status`, create_time, update_time
+        from charge_type_info
+        where `status` = 0
+        <if test="typeName!=null">
+            AND type_name = #{typeName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from charge_type_info
+        where `status` = 0
+        <if test="typeName!=null">
+            AND type_name = #{typeName,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

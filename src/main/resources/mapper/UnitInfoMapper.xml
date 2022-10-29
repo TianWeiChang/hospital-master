@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.UnitInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.entity.UnitInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from unit_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tian.entity.UnitInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into unit_info (unit_name, operation_user_id, `status`, 
+      create_time, update_time)
+    values (#{unitName,jdbcType=VARCHAR}, #{operationUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.UnitInfo" >
+    update unit_info
+    set unit_name = #{unitName,jdbcType=VARCHAR},
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, unit_name, operation_user_id, `status`, create_time, update_time
+    from unit_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, unit_name, operation_user_id, `status`, create_time, update_time
+    from unit_info
+    where `status`=0
+    <if test="unitName!=null">
+      and unit_name = #{unitName,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="count" resultType="int">
+    select count(1)
+    from unit_info
+    where `status`=0
+    <if test="unitName!=null">
+      and unit_name = #{unitName,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

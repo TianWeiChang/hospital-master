@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.PatientInfoMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.PatientInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="car_id" property="carId" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from patient_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.tian.entity.PatientInfo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into patient_info (patient_name, gender, age,
+        car_id, phone, operation_user_id,
+        create_time, update_time)
+        values (#{patientName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{age,jdbcType=INTEGER},
+        #{carId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{operationUserId,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.PatientInfo">
+    update patient_info
+    set patient_name = #{patientName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      car_id = #{carId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, patient_name, gender, age, car_id, phone, operation_user_id, create_time, 
+    update_time
+    from patient_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, patient_name, gender, age, car_id, phone, operation_user_id, create_time,
+        update_time
+        from patient_info
+        where 1=1
+        <if test="carId!=null">
+            and car_id = #{carId,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="selectByIdList" resultMap="BaseResultMap" parameterType="list">
+        select id, patient_name, gender, age, car_id, phone, operation_user_id, create_time,
+        update_time
+        from patient_info
+        where id in
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="count" resultType="int">
+        select count(1)
+        from patient_info
+        where 1=1
+        <if test="carId!=null">
+            and car_id = #{carId,jdbcType=VARCHAR}
+        </if>
+    </select>
+  <select id="selectByCardId" resultMap="BaseResultMap">
+    select id, patient_name, gender, age, car_id, phone, operation_user_id, create_time,
+    update_time
+    from patient_info
+    where 1=1
+    <if test="carId!=null">
+      and car_id = #{carId,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

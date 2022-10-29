@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.OutpatientDepartmentChargeProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.entity.OutpatientDepartmentChargeProject" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="outpatient_department__project_name" property="outpatientDepartmentProjectName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="unit_id" property="unitId" jdbcType="INTEGER" />
+    <result column="inspect" property="inspect" jdbcType="INTEGER" />
+    <result column="project_type" property="projectType" jdbcType="INTEGER" />
+    <result column="project_big_type_id" property="projectBigTypeId" jdbcType="INTEGER" />
+    <result column="project_big_type_name" property="projectBigTypeName" jdbcType="VARCHAR" />
+    <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from outpatient_department_charge_project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tian.entity.OutpatientDepartmentChargeProject" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into outpatient_department_charge_project (outpatient_department__project_name, price, 
+      unit_name, unit_id, inspect, project_type,
+      project_big_type_id, project_big_type_name, operation_user_id, 
+      `status`, create_time, update_time
+      )
+    values (#{outpatientDepartmentProjectName,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
+      #{unitName,jdbcType=VARCHAR}, #{unitId,jdbcType=INTEGER}, #{inspect,jdbcType=INTEGER},#{projectType,jdbcType=INTEGER},
+      #{projectBigTypeId,jdbcType=INTEGER}, #{projectBigTypeName,jdbcType=VARCHAR}, #{operationUserId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.OutpatientDepartmentChargeProject" >
+    update outpatient_department_charge_project
+    set outpatient_department__project_name = #{outpatientDepartmentProjectName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      unit_name = #{unitName,jdbcType=VARCHAR},
+      unit_id = #{unitId,jdbcType=INTEGER},
+      inspect = #{inspect,jdbcType=INTEGER},
+      project_type = #{projectType,jdbcType=INTEGER},
+      project_big_type_id = #{projectBigTypeId,jdbcType=INTEGER},
+      project_big_type_name = #{projectBigTypeName,jdbcType=VARCHAR},
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, outpatient_department__project_name, price, unit_name, unit_id, inspect,project_type,
+    project_big_type_id, project_big_type_name, operation_user_id, `status`, create_time, 
+    update_time
+    from outpatient_department_charge_project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, outpatient_department__project_name, price, unit_name, unit_id, inspect,project_type,
+    project_big_type_id, project_big_type_name, operation_user_id, `status`, create_time, 
+    update_time
+    from outpatient_department_charge_project
+    where `status` = 0
+    <if test="outpatientDepartmentProjectName!=null">
+      AND outpatient_department__project_name = #{outpatientDepartmentProjectName,jdbcType=VARCHAR}
+    </if>
+    <if test="projectType!=null">
+    AND project_type = #{projectType,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="count" resultType="int">
+    select count(1)
+    from outpatient_department_charge_project
+    WHERE `status` = 0
+    <if test="outpatientDepartmentProjectName!=null">
+      AND outpatient_department__project_name = #{outpatientDepartmentProjectName,jdbcType=VARCHAR}
+    </if>
+    AND project_type = #{projectType,jdbcType=INTEGER}
+  </select>
+</mapper>

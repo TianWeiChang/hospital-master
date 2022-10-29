@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.StorageInOrderInfoMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.StorageInOrderInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="warehouse_name" property="warehouseName" jdbcType="VARCHAR"/>
+        <result column="drug_type_id" property="drugTypeId" jdbcType="INTEGER"/>
+        <result column="drug_name" property="drugName" jdbcType="VARCHAR"/>
+        <result column="drug_id" property="drugId" jdbcType="INTEGER"/>
+        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR"/>
+        <result column="operator_name" property="operatorName" jdbcType="VARCHAR"/>
+        <result column="whole_sale_price" property="wholeSalePrice" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="unit" property="unit" jdbcType="INTEGER"/>
+        <result column="product_date" property="productDate" jdbcType="DATE"/>
+        <result column="valid_date" property="validDate" jdbcType="DATE"/>
+        <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from storage_in_order_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.tian.entity.StorageInOrderInfo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into storage_in_order_info (warehouse_name, drug_type_id, drug_name,
+        drug_id, supplier_name, operator_name,
+        whole_sale_price, price, `count`,
+        unit, product_date, valid_date,
+        operation_user_id, `status`, create_time,
+        update_time)
+        values (#{warehouseName,jdbcType=VARCHAR}, #{drugTypeId,jdbcType=INTEGER}, #{drugName,jdbcType=VARCHAR},
+        #{drugId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR},
+        #{wholeSalePrice,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{count,jdbcType=INTEGER},
+        #{unit,jdbcType=INTEGER}, #{productDate,jdbcType=DATE}, #{validDate,jdbcType=DATE},
+        #{operationUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.StorageInOrderInfo">
+    update storage_in_order_info
+    set warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      drug_type_id = #{drugTypeId,jdbcType=INTEGER},
+      drug_name = #{drugName,jdbcType=VARCHAR},
+      drug_id = #{drugId,jdbcType=INTEGER},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      operator_name = #{operatorName,jdbcType=VARCHAR},
+      whole_sale_price = #{wholeSalePrice,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      `count` = #{count,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=INTEGER},
+      product_date = #{productDate,jdbcType=DATE},
+      valid_date = #{validDate,jdbcType=DATE},
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, warehouse_name, drug_type_id, drug_name, drug_id, supplier_name, operator_name, 
+    whole_sale_price, price, `count`, unit, product_date, valid_date, operation_user_id, 
+    `status`, create_time, update_time
+    from storage_in_order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, warehouse_name, drug_type_id, drug_name, drug_id, supplier_name, operator_name,
+        whole_sale_price, price, `count`, unit, product_date, valid_date, operation_user_id,
+        `status`, create_time, update_time
+        from storage_in_order_info
+        where `status` = 0
+        <if test="drugId!=null">
+            and drug_id = #{drugId,jdbcType=INTEGER} and `count` > 0
+        </if>
+    </select>
+
+    <select id="storageSum" resultType="java.lang.Integer">
+        select sum(count)
+        from storage_in_order_info
+        where `status` = 0
+        <if test="drugId!=null">
+            and drug_id = #{drugId,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>
