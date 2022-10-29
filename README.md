@@ -1,4 +1,4 @@
-基于上一个版本的改进、优化、完善。
+基于上一个[版本](https://github.com/TianWeiChang/hospital)的改进、优化、完善。
 
 这个版本引入了Redis、RabbitMQ。
 - Redis用来做缓存，其他场景暂时没想好怎么用上去，想到了再用上去
