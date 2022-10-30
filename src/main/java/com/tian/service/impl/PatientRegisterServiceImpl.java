@@ -79,6 +79,7 @@ public class PatientRegisterServiceImpl implements PatientRegisterService {
             PatientInfo patientInfo = patientInfoListMap.get(p.getPatientId());
 
             registerParamsDTO.setGenderName(GenderEnum.valueOfCode(patientInfo.getGender()).getDesc());
+            registerParamsDTO.setGender(patientInfo.getGender());
             registerParamsDTO.setAge(patientInfo.getAge());
             registerParamsDTO.setPatientName(patientInfo.getPatientName());
             registerParamsDTO.setPhone(patientInfo.getPhone());

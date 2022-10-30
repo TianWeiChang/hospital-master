@@ -43,11 +43,21 @@ public class DoctorController {
         return ReturnDataUtil.getTableData(pageInfo);
     }
 
+    /**
+     * 查询医生
+     */
+    @RequestMapping("/list/department")
+    @ResponseBody
+    public Object doctorListDepartment(DoctorInfo doctorInfo) {
+        return doctorInfoService.doctorList(doctorInfo);
+    }
+
     @RequestMapping("/doctorDepartment")
     @ResponseBody
     public Object doctorDepartment(DoctorInfo doctorInfo) {
         return doctorInfoService.doctorList(doctorInfo);
     }
+
     /**
      * 添加医生
      */

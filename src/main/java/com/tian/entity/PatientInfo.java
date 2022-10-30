@@ -67,7 +67,8 @@ public class PatientInfo implements Serializable {
     }
 
     public String getPhone() {
-        return PrivacyDimmer.maskMobile(this.phone);
+//        return PrivacyDimmer.maskMobile(this.phone);
+        return phone;
     }
 
     public void setPhone(String phone) {

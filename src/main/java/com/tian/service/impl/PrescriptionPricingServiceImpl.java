@@ -50,6 +50,7 @@ public class PrescriptionPricingServiceImpl implements PrescriptionPricingServic
         prescriptionPricing.setPaymentStatus(paymentStatus == null ? 0 : paymentStatus);
         return prescriptionPricingMapper.querySumByType(prescriptionPricing);
     }
+
     @Override
     public Object querySumByRegisterId(Integer registerId) {
         PrescriptionPricing prescriptionPricing = new PrescriptionPricing();
@@ -83,23 +84,28 @@ public class PrescriptionPricingServiceImpl implements PrescriptionPricingServic
         prescriptionPricing.setTotal(prescriptionPricing.getDrugCount() * prescriptionPricing.getPrice());
         prescriptionPricing.setPaymentStatus(PaymentStatusEnum.INIT.getCode());
         prescriptionPricing.setStatus(StatusEnum.normal.getCode());
-        int flag = prescriptionPricingMapper.insert(prescriptionPricing);
-        if (flag != 1) {
-            return flag;
+        int insertSuccess = prescriptionPricingMapper.insert(prescriptionPricing);
+        if (insertSuccess != 1) {
+            return insertSuccess;
         }
         int drugId = prescriptionPricing.getDrugId();
         StorageInOrderInfo storage = new StorageInOrderInfo();
         storage.setDrugId(drugId);
         List<StorageInOrderInfo> storageInOrderInfoList = storageInOrderInfoMapper.selectAll(storage);
         StorageInOrderInfo storageInOrderInfo;
-        if (storageInOrderInfoList.size() > 0) {
-            storageInOrderInfo = storageInOrderInfoList.get(0);
-            //库存扣减
-            storageInOrderInfo.setCount(storageInOrderInfo.getCount() - prescriptionPricing.getDrugCount());
-            return storageInOrderInfoMapper.updateByPrimaryKey(storageInOrderInfo);
-        } else {
+        if (storageInOrderInfoList.size() == 0) {
             throw new Exception("失败");
         }
+        storageInOrderInfo = storageInOrderInfoList.get(0);
+        //库存扣减
+        storageInOrderInfo.setCount(storageInOrderInfo.getCount() - prescriptionPricing.getDrugCount());
+        int updateSuccess = storageInOrderInfoMapper.updateByPrimaryKey(storageInOrderInfo);
+        if (updateSuccess != 1) {
+            throw new Exception("更新失败");
+        }
+
+        return updateSuccess;
+
     }
 
     @Transactional(rollbackFor = Exception.class)

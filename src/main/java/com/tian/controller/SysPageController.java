@@ -223,21 +223,35 @@ public class SysPageController {
         return "cao/xaingmupay";
     }
 
-    //进入 药品缴费页面
+    /**
+     * 进入 药品缴费页面
+     */
     @RequestMapping("/caoout/out")
     public Object look(Model model){
         return  "cao/Ctoll";
     }
 
-    //进入项目检查页面
+    /**
+     * 进入项目检查页面
+     */
     @RequestMapping("/xpay/seljian")
     public Object seljian(){
         return "cao/jiancha";
     }
 
-    //进入 查看患者列表 页面
+    /**
+     * 进入 查看患者列表 页面
+     */
     @RequestMapping("/caotake/haun")
     public Object haun(){
         return "cao/chuanzhe";
+    }
+
+    /**
+     * 跳转 入院登记 页面
+     */
+    @RequestMapping("/liao/admin")
+    public String admin(){
+        return "liao/admin";
     }
 }

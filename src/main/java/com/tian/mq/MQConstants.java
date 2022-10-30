@@ -9,4 +9,8 @@ package com.tian.mq;
 public class MQConstants {
     public static final String DOCTOR_ADD_LOG = "doctor.add.log";
     public static final String LOGIN_LOG = "login.log";
+    /**
+     * 项目划价
+     */
+    public static final String PRESCRIPTION_PRICING_LOG = "prescription.pricing.log";
 }

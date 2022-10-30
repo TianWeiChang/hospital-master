@@ -6,7 +6,7 @@ import com.tian.entity.RegisterTypeInfo;
 import com.tian.entity.User;
 import com.tian.enums.StatusEnum;
 import com.tian.mapper.DoctorInfoMapper;
-import com.tian.mq.RabbitMQClient;
+import com.tian.mq.RabbitMqClient;
 import com.tian.service.DepartmentInfoService;
 import com.tian.service.DoctorInfoService;
 import com.tian.service.RegisteredTypeService;
@@ -32,7 +32,7 @@ public class DoctorInfoServiceImpl implements DoctorInfoService {
     @Resource
     private DoctorInfoMapper doctorInfoMapper;
     @Resource
-    private RabbitMQClient rabbitMQClient;
+    private RabbitMqClient rabbitMQClient;
     @Resource
     private DepartmentInfoService departmentInfoService;
     @Resource

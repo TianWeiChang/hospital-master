@@ -44,6 +44,12 @@ public class BedController {
         return tableData;
     }
 
+    @RequestMapping("/all")
+    @ResponseBody
+    public Object all(BedInfo bedInfo) {
+        return bedInfoService.list(bedInfo);
+    }
+
     @RequestMapping("/add")
     @ResponseBody
     public Object add(BedInfo bedInfo, HttpServletRequest request) {

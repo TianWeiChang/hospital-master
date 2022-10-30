@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @createTime 2022年10月15日 07:44
  */
 @Component
-public class RabbitMQClient {
+public class RabbitMqClient {
 
     @Resource
     private RabbitTemplate rabbitTemplate;

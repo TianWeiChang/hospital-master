@@ -2,19 +2,17 @@ package com.tian.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tian.config.RedisKeyPre;
 import com.tian.entity.DataGridView;
 import com.tian.entity.Menu;
 import com.tian.entity.TreeNode;
 import com.tian.entity.User;
-import com.tian.mq.RabbitMQClient;
+import com.tian.mq.RabbitMqClient;
 import com.tian.service.MenuService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +31,7 @@ public class MenuController extends BaseController {
     @Resource
     private MenuService menuService;
     @Resource
-    private RabbitMQClient rabbitMQClient;
+    private RabbitMqClient rabbitMQClient;
   /*  @Resource
     private RedisTemplate<String,User> redisTemplate;*/
     //跳转到登陆页面

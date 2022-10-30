@@ -43,6 +43,12 @@ public class ChargeTypeInfoController {
         return tableData;
     }
 
+    @RequestMapping("/all")
+    @ResponseBody
+    public Object all(ChargeTypeInfo chargeTypeInfo) {
+        return chargeTypeInfoService.list(chargeTypeInfo);
+    }
+
     @RequestMapping("/add")
     @ResponseBody
     public Object add(ChargeTypeInfo chargeTypeInfo, HttpServletRequest request) {

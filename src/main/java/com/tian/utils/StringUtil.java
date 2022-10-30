@@ -3,10 +3,7 @@ package com.tian.utils;
 import com.tian.entity.DepartmentInfo;
 import com.tian.entity.PatientRegister;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,20 +24,21 @@ public class StringUtil {
     }
 
     public static void main(String[] args) {
-        List<PatientRegister> patientRegisterList = new ArrayList<>();
-        PatientRegister patientRegister = new PatientRegister();
-        patientRegister.setPatientId(1);
-        patientRegisterList.add(patientRegister);
-
-        PatientRegister patientRegister1 = new PatientRegister();
-        patientRegister1.setPatientId(1);
-        patientRegisterList.add(patientRegister1);
-        String ids= patientRegisterList.stream().map(item -> String.valueOf(item.getPatientId())).collect(Collectors.joining(","));
+//        List<PatientRegister> patientRegisterList = new ArrayList<>();
+//        PatientRegister patientRegister = new PatientRegister();
+//        patientRegister.setPatientId(1);
+//        patientRegisterList.add(patientRegister);
+//
+//        PatientRegister patientRegister1 = new PatientRegister();
+//        patientRegister1.setPatientId(1);
+//        patientRegisterList.add(patientRegister1);
+//        String ids= patientRegisterList.stream().map(item -> String.valueOf(item.getPatientId())).collect(Collectors.joining(","));
 //        Map<Integer, String> departmentInfoMap = departmentInfos.stream().collect(Collectors.toMap(DepartmentInfo::getId, DepartmentInfo::getDepartmentName));
 //        Map<Long, User> maps = userList.stream().collect(Collectors.toMap(User::getId,Function.identity()));
-        System.out.println(ids);
+//        System.out.println(ids);
        /* String[] idss = split(ids);
         System.out.println(idss);*/
+
     }
 
     /**

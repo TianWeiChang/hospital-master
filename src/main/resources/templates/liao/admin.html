@@ -52,8 +52,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">性别:</label>
                 <div class="layui-input-inline">
-                    <input type="radio" name="sex" value="男" title="男" checked>
-                    <input type="radio" name="sex" value="女" title="女">
+                    <input type="radio" name="sex" value="1" title="男" checked>
+                    <input type="radio" name="sex" value="0" title="女">
                 </div>
             </div>
             <div class="layui-inline">
@@ -236,7 +236,7 @@
         //渲染数据表格
         tableIns=table.render({
             elem: '#selRegister'   //渲染的目标对象
-            ,url:'../liao/selRegister' //数据接口
+            ,url:'/hospitalization/in/initPage' //数据接口
             ,title: '用户数据表'//数据导出来的标题
             ,toolbar:"#ToolBar"   //表格的工具条
             ,height:'full-200'
@@ -261,19 +261,19 @@
         //门诊信息显示
         tableInss=table.render({
             elem: '#show'   //渲染的目标对象
-            ,url:'' //数据接口
+            ,url:'/patient/register/page' //数据接口
             ,title: '门诊信息显示'//数据导出来的标题
             ,height:'full-200'
             ,page: 1  //是否启用分页, limits: [10, 20, 30]
             ,limits: [7, 20, 30]
             ,limit: 7//默认采用3
             ,cols: [[   //列表数据
-                {field:'userName', title:'姓名',align:'center',width:'12%'}
-                ,{field:'sex', title:'性别',align:'center',width:'10%',sort: true}
+                {field:'patientName', title:'姓名',align:'center',width:'12%'}
+                ,{field:'genderName', title:'性别',align:'center',width:'10%',sort: true}
                 ,{field:'age', title:'年龄',align:'center',width:'10%',sort: true}
                 ,{field:'phone', title:'电话',align:'center',width:'16%'}
-                ,{field:'idcard', title:'身份证号',align:'center',width:'24%'}
-                ,{field:'diagnose', title:'转院原因',align:'center',width:'17%'}
+                ,{field:'carId', title:'身份证号',align:'center',width:'24%'}
+                ,{field:'pathogeny', title:'转院原因',align:'center',width:'17%'}
                 ,{fixed: '', title:'操作', toolbar: '#ToolBars',align:'center',width:'11%'}
             ]]
         })
@@ -281,7 +281,7 @@
         $("#doSearch").click(function(){
             var params=$("#searchFrm").serialize();
             tableIns.reload({
-                url:"../liao/selRegister?"+params
+                url:"/hospitalization/in/initPage?"+params
             })
         });
 
@@ -316,24 +316,24 @@
         }
         //初始化添加or修改到下拉框中的值
         $.ajax({
-            url: '../liao/selDepartment',
+            url: '/doctor/findAllDepartments',
             dataType: 'json',
             type: 'post',
             success: function (data) {
                 $.each(data, function (index, item) {
-                    $('#departmentId').append(new Option(item.department, item.departmentId));// 下拉菜单里添加元素
+                    $('#departmentId').append(new Option(item.departmentName, item.id));// 下拉菜单里添加元素
                 });
                 layui.form.render("select");//重新渲染 固定写法
             }
         })
-        //查询医保折扣
+        //查询医保(收费类型)
         $.ajax({
-            url: '../liao/selDis',
+            url: '/charge/type/all',
             dataType: 'json',
             type: 'post',
             success: function (data) {
                 $.each(data, function (index, item) {
-                    $('#discount').append(new Option(item.moneytype, item.percent));// 下拉菜单里添加元素
+                    $('#discount').append(new Option(item.typeName, item.id));// 下拉菜单里添加元素
                 });
                 layui.form.render("select");//重新渲染 固定写法
             }
@@ -345,7 +345,7 @@
                 $("#doctorId1").empty();
                 $("#bedId1").empty();
                 $.ajax({
-                    url: '../liao/selDoctor',
+                    url: '/doctor/list/department',
                     dataType: 'json',
                     type: 'post',
                     data:{
@@ -353,15 +353,15 @@
                     },
                     success: function (data) {
                         $.each(data, function (index, item) {
-                            $('#doctorId').append(new Option(item.doctorName, item.doctorId));// 下拉菜单里添加元素
-                            $('#doctorId1').append(new Option(item.doctorName, item.doctorId));
+                            $('#doctorId').append(new Option(item.doctorName, item.id));// 下拉菜单里添加元素
+                            $('#doctorId1').append(new Option(item.doctorName, item.id));
                         });
                         layui.form.render("select");//重新渲染 固定写法
                     }
                 })
                 //查询床位
                 $.ajax({
-                    url: '../liao/selBed',
+                    url: '/bed/all',
                     dataType: 'json',
                     type: 'post',
                     data:{
@@ -369,8 +369,8 @@
                     },
                     success: function (data) {
                         $.each(data, function (index, item) {
-                            $('#bedId').append(new Option(item.bedname, item.bedId));// 下拉菜单里添加元素
-                            $('#bedId1').append(new Option(item.bedname, item.bedId));
+                            $('#bedId').append(new Option(item.bedName, item.id));// 下拉菜单里添加元素
+                            $('#bedId1').append(new Option(item.bedName, item.id));
                         });
                         layui.form.render("select");//重新渲染 固定写法
                     }
@@ -414,7 +414,7 @@
                 area:['800px','550px'],
                 success:function(index){
                     tableInss.reload({
-                        url:"../liao/selDoor"
+                        url:"/patient/register/page"
                     })
                 }
             });
@@ -423,10 +423,30 @@
         table.on('tool(show)', function(obj){
             if(obj.event=='sel'){
                 $.each(obj.data, function (index, item) {
-                    $("#"+index).val(item);
-                    if(index=="sex"){
+                    if(index== 'patientName'){
+                        $("#userName").val(item);
+                    }
+                    if(index== 'pathogeny'){
+                        $("#diagnose").val(item);
+                    }
+                    if(index== 'age'){
+                        $("#age").val(item);
+                    }
+                    if(index== 'phone'){
+                        $("#phone").val(item);
+                    }
+                    if(index== 'carId'){
+                        $("#idcard").val(item);
+                    }
+                    if(index=="genderName"){
+                        var sex =1;
+                        $("#sex").val(1);
+                        if(item=='女'){
+                            $("#sex").val(0);
+                            sex=0;
+                        }
                         $("input[name='sex']").each(function(){
-                            if($(this).val()==item){
+                            if($(this).val()==sex){
                                 $(this).prop("checked",true);
                                 form.render(); //更新单选框
                             }
