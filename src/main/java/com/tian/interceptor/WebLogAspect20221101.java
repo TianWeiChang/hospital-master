@@ -1,52 +1,33 @@
 package com.tian.interceptor;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.util.URLUtil;
-import cn.hutool.json.JSONUtil;
-import com.tian.annotation.ArgsLogAnnotation;
-import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author tianwc  公众号：java后端技术全栈、面试专栏
  * @version 1.0.0
- * @date 2022年11月01日 17:24
+ * @date 2022年11月01日 17:41
+ * <p>
+ * controller层的日志切面 ，可能还会出现其他类型的切面，此时就要搞清楚切面的先后顺序 所以引入@Order
  */
-@Aspect
+/*@Aspect
 @Component
-@Slf4j
-public class WebLogAspect {
-    /**
-     * 这里我们使用注解的形式
-     * 当然，我们也可以通过切点表达式直接指定需要拦截的package,需要拦截的class 以及 method
-     * 切点表达式:   execution(...)
-     */
-    @Pointcut("@annotation(com.tian.annotation.ArgsLogAnnotation)")
+@Order(1)*/
+public class WebLogAspect20221101 {
+   /* private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
+
+    @Pointcut("execution(public * com.tian.controller.*.*(..))||execution(public * com.tian.*.controller.*.*(..))")
     public void webLog() {
     }
 
-    /**
+    @Before("webLog()")
+    public void doBefore(JoinPoint joinPoint) throws Throwable {
+    }
+
+    @AfterReturning(value = "webLog()", returning = "ret")
+    public void doAfterReturning(Object ret) throws Throwable {
+    }
+
+    *//**
      * 接口请求参数、相应参数、耗时、路径等信息打印
-     */
+     *//*
     @Around("webLog()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
@@ -60,10 +41,6 @@ public class WebLogAspect {
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
 
-        ArgsLogAnnotation argsLogAnnotation = method.getAnnotation(ArgsLogAnnotation.class);
-
-        String methodDescription = argsLogAnnotation.methodDescription();
-
         long endTime = System.currentTimeMillis();
         String urlStr = request.getRequestURL().toString();
         webLog.setBasePath(StrUtil.removeSuffix(urlStr, URLUtil.url(urlStr).getPath()));
@@ -76,20 +53,19 @@ public class WebLogAspect {
         webLog.setStartTime(startTime);
         webLog.setUri(request.getRequestURI());
         webLog.setUrl(request.getRequestURL().toString());
-        Map<String, Object> logMap = new HashMap<>(8);
-        logMap.put("url：", webLog.getUrl());
-        logMap.put("method：", webLog.getMethod());
-        logMap.put("parameter：", webLog.getParameter());
-        logMap.put("cost Time：", webLog.getSpendTime());
-        logMap.put("methodDescription：", methodDescription);
-
-        log.info("{}", JSONUtil.parse(logMap));
+        Map<String, Object> logMap = new HashMap<>();
+        logMap.put("url", webLog.getUrl());
+        logMap.put("method", webLog.getMethod());
+        logMap.put("parameter", webLog.getParameter());
+        logMap.put("spendTime", webLog.getSpendTime());
+        logMap.put("description", webLog.getDescription());
+        LOGGER.info("{}", JSONUtil.parse(webLog));
         return result;
     }
 
-    /**
+    *//**
      * 根据方法和传入的参数获取请求参数
-     */
+     *//*
     private Object getParameter(Method method, Object[] args) {
         List<Object> argList = new ArrayList<>();
         Parameter[] parameters = method.getParameters();
@@ -118,5 +94,6 @@ public class WebLogAspect {
         } else {
             return argList;
         }
-    }
+    }*/
 }
+

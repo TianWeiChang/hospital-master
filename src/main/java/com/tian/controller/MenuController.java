@@ -2,6 +2,7 @@ package com.tian.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tian.annotation.ArgsLogAnnotation;
 import com.tian.entity.DataGridView;
 import com.tian.entity.Menu;
 import com.tian.entity.TreeNode;
@@ -32,8 +33,9 @@ public class MenuController extends BaseController {
     private MenuService menuService;
     @Resource
     private RabbitMqClient rabbitMQClient;
-  /*  @Resource
-    private RedisTemplate<String,User> redisTemplate;*/
+
+    /*  @Resource
+      private RedisTemplate<String,User> redisTemplate;*/
     //跳转到登陆页面
     @RequestMapping("toLogin")
     public String toLogin() {
@@ -43,6 +45,7 @@ public class MenuController extends BaseController {
     /**
      * 登录  shiro 登录
      */
+    @ArgsLogAnnotation(methodDescription = "用户登录")
     @RequestMapping("login")
     public String login(Model model, HttpServletRequest request, String loginname, String pwd) {
         //第一步：建立subject

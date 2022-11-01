@@ -6,7 +6,6 @@ import com.tian.enums.StatusEnum;
 import com.tian.mapper.ChargeTypeInfoMapper;
 import com.tian.service.ChargeTypeInfoService;
 import com.tian.utils.DateUtil;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

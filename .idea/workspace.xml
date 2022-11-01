@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/enums/PricingBusinessTypeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/message/PrescriptionPricingMsg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/annotation/ArgsLogAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/interceptor/WebLogAspect20221101.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/enums/QueueEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/enums/QueueEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/CancelOrderSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/CancelOrderSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectExchangeConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectExchangeConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/MQConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/MqConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/RabbitMqClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/RabbitMqClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/PrescriptionPricingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/PrescriptionPricingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/interceptor/WebLogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/interceptor/WebLogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/ChargeTypeInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/ChargeTypeInfoServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,10 +36,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="AnnotationType" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="AnnotationType" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -78,7 +73,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../fuint-master/fuint-application/pom.xml" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -538,6 +533,8 @@
       <workItem from="1667013522638" duration="3520000" />
       <workItem from="1667087313902" duration="21479000" />
       <workItem from="1667174335685" duration="5577000" />
+      <workItem from="1667266546414" duration="175000" />
+      <workItem from="1667274261774" duration="5952000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -616,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667133581071</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="使用MQ 可以把部分操作日志落库">
+      <created>1667266699907</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1667266699907</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -647,7 +651,8 @@
     <MESSAGE value="数据库表脚本" />
     <MESSAGE value="介绍" />
     <MESSAGE value="住院管理--入院管理部分" />
-    <option name="LAST_COMMIT_MESSAGE" value="住院管理--入院管理部分" />
+    <MESSAGE value="使用MQ 可以把部分操作日志落库" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用MQ 可以把部分操作日志落库" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
