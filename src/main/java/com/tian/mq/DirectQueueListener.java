@@ -1,5 +1,6 @@
 package com.tian.mq;
 
+import com.tian.entity.PrescriptionPricing;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -20,7 +21,7 @@ public class DirectQueueListener {
      */
 
     @RabbitHandler
-    @RabbitListener(queues = MQConstants.LOGIN_LOG)
+    @RabbitListener(queues = MqConstants.LOGIN_LOG)
     public void loginLog(String testMessage) {
         /**
          * 把日志信息录入到相应的数据库表中
@@ -29,7 +30,7 @@ public class DirectQueueListener {
     }
 
     @RabbitHandler
-    @RabbitListener(queues = MQConstants.DOCTOR_ADD_LOG)
+    @RabbitListener(queues = MqConstants.DOCTOR_ADD_LOG)
     public void doctorAdd(String testMessage) {
         /**
          * 把日志信息录入到相应的数据库表中
@@ -37,4 +38,9 @@ public class DirectQueueListener {
         log.info("系统【添加医生】日志记录 : {}", testMessage);
     }
 
+    @RabbitHandler
+    @RabbitListener(queues = MqConstants.DOCTOR_ADD_LOG)
+    public void doctorAdd(Message<PrescriptionPricing> testMessage) {
+        log.info("系统【添加医生】日志记录 : {}", testMessage);
+    }
 }

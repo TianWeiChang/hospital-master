@@ -45,4 +45,18 @@ public class DirectExchangeConfig {
     public Binding bindingDirectExchange4DoctorAddLog(Queue doctorAddLogQueue, DirectExchange doctorAddLogDirectExchange) {
         return BindingBuilder.bind(doctorAddLogQueue).to(doctorAddLogDirectExchange).with(QueueEnum.DOCTOR_ADD_LOG.getRouteKey());
     }
+
+    @Bean
+    public Queue prescriptionPricingQueue() {
+        return new Queue(QueueEnum.PRICING_LOG.getQueueName(), true);
+    }
+
+    @Bean
+    public DirectExchange prescriptionPricingAddLogDirectExchange() {
+        return new DirectExchange(QueueEnum.PRICING_LOG.getExchange(), true, false);
+    }
+    @Bean
+    public Binding bindingDirectExchange4PrescriptionPricingAddLog(Queue prescriptionPricingQueue, DirectExchange prescriptionPricingAddLogDirectExchange) {
+        return BindingBuilder.bind(prescriptionPricingQueue).to(prescriptionPricingAddLogDirectExchange).with(QueueEnum.PRICING_LOG.getRouteKey());
+    }
 }

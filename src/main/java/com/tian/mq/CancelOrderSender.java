@@ -24,7 +24,7 @@ public class CancelOrderSender {
 
     public void sendMessage(Long orderId, final long delayTimes){
         //给延迟队列发送消息
-        rabbitTemplate.convertAndSend(MQConstants.DIRECT_EXCHANGE, MQConstants.CANCEL_ROUT_KEY, orderId, new MessagePostProcessor() {
+        rabbitTemplate.convertAndSend(MqConstants.DIRECT_EXCHANGE, MqConstants.CANCEL_ROUT_KEY, orderId, new MessagePostProcessor() {
             @Override
             public Message postProcessMessage(Message message) throws AmqpException {
                 //给消息设置延迟毫秒值

@@ -4,15 +4,20 @@ import com.tian.entity.PrescriptionPricing;
 import com.tian.entity.StorageInOrderInfo;
 import com.tian.entity.User;
 import com.tian.enums.PaymentStatusEnum;
+import com.tian.enums.PricingBusinessTypeEnum;
 import com.tian.enums.StatusEnum;
 import com.tian.mapper.PrescriptionPricingMapper;
 import com.tian.mapper.StorageInOrderInfoMapper;
+import com.tian.mq.Message;
+import com.tian.mq.RabbitMqClient;
+import com.tian.mq.message.PrescriptionPricingMsg;
 import com.tian.service.PrescriptionPricingService;
 import com.tian.utils.DateUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +33,9 @@ public class PrescriptionPricingServiceImpl implements PrescriptionPricingServic
     private PrescriptionPricingMapper prescriptionPricingMapper;
     @Resource
     private StorageInOrderInfoMapper storageInOrderInfoMapper;
+    @Resource
+    private RabbitMqClient rabbitMqClient;
+
 
     @Override
     public List<PrescriptionPricing> list(PrescriptionPricing prescriptionPricing) {
@@ -104,6 +112,19 @@ public class PrescriptionPricingServiceImpl implements PrescriptionPricingServic
             throw new Exception("更新失败");
         }
 
+        PrescriptionPricingMsg<PrescriptionPricing> prescriptionPricingMsg = new PrescriptionPricingMsg<>();
+        if(prescriptionPricing.getType()==0){
+            prescriptionPricingMsg.setBusinessType(PricingBusinessTypeEnum.ADD_PRESCRIPTION_PRICING.getCode());
+        }
+        if(prescriptionPricing.getType()==1){
+            prescriptionPricingMsg.setBusinessType(PricingBusinessTypeEnum.ADD_PROJECT_PRICING.getCode());
+        }
+        prescriptionPricingMsg.setCurrTime(new Date());
+        prescriptionPricingMsg.setDoctorId(user.getUserid());
+        prescriptionPricingMsg.setPatientId(prescriptionPricing.getPatientRegisterId());
+        prescriptionPricingMsg.setData(prescriptionPricing);
+        //操作日志异步落库
+        rabbitMqClient.sendPrescriptionPricing(prescriptionPricingMsg);
         return updateSuccess;
 
     }

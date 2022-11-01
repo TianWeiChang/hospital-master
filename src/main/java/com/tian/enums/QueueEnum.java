@@ -1,6 +1,6 @@
 package com.tian.enums;
 
-import com.tian.mq.MQConstants;
+import com.tian.mq.MqConstants;
 import lombok.Getter;
 
 /**
@@ -14,11 +14,15 @@ public enum QueueEnum {
     /**
      * 登录日志
      */
-    LOGIN_LOG(MQConstants.LOGIN_LOG, MQConstants.LOGIN_LOG, MQConstants.LOGIN_LOG),
+    LOGIN_LOG(MqConstants.LOGIN_LOG, MqConstants.LOGIN_LOG, MqConstants.LOGIN_LOG),
     /**
      * 添加医生日志
      */
-    DOCTOR_ADD_LOG (MQConstants.DOCTOR_ADD_LOG, MQConstants.DOCTOR_ADD_LOG, MQConstants.DOCTOR_ADD_LOG);
+    DOCTOR_ADD_LOG(MqConstants.DOCTOR_ADD_LOG, MqConstants.DOCTOR_ADD_LOG, MqConstants.DOCTOR_ADD_LOG),
+    /**
+     * 医生给病人开处方
+     */
+    PRICING_LOG(MqConstants.PRICING_LOG, MqConstants.PRICING_LOG, MqConstants.PRICING_LOG);
 
     /**
      * 交换名称
