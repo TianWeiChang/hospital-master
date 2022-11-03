@@ -18,11 +18,11 @@ public class HospitalizationInfo implements Serializable {
 
     private Integer status;
 
-    private String patientAddress;
-
     private Date createTime;
 
     private Date updateTime;
+
+    private String patientAddress;
 
     private static final long serialVersionUID = 1L;
 
@@ -103,22 +103,27 @@ public class HospitalizationInfo implements Serializable {
     }
 
     public void setPatientAddress(String patientAddress) {
-        this.patientAddress = patientAddress;
+        this.patientAddress = patientAddress == null ? null : patientAddress.trim();
     }
 
     @Override
     public String toString() {
-        return "HospitalizationInfo{" +
-                "id=" + id +
-                ", patientRegisterId=" + patientRegisterId +
-                ", doctorId=" + doctorId +
-                ", bedInfoId=" + bedInfoId +
-                ", bond=" + bond +
-                ", operationUserId=" + operationUserId +
-                ", status=" + status +
-                ", patientAddress='" + patientAddress + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", patientRegisterId=").append(patientRegisterId);
+        sb.append(", doctorId=").append(doctorId);
+        sb.append(", bedInfoId=").append(bedInfoId);
+        sb.append(", bond=").append(bond);
+        sb.append(", operationUserId=").append(operationUserId);
+        sb.append(", status=").append(status);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", patientAddress=").append(patientAddress);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

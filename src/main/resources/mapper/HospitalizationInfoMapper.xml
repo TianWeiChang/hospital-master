@@ -1,55 +1,57 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tian.mapper.HospitalizationInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.tian.entity.HospitalizationInfo" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="patient_register_id" property="patientRegisterId" jdbcType="INTEGER" />
-    <result column="doctor_id" property="doctorId" jdbcType="INTEGER" />
-    <result column="bed_info_id" property="bedInfoId" jdbcType="INTEGER" />
-    <result column="bond" property="bond" jdbcType="INTEGER" />
-    <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER" />
-    <result column="patient_address" property="patientAddress" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tian.mapper.HospitalizationInfoMapper">
+  <resultMap id="BaseResultMap" type="com.tian.entity.HospitalizationInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="patient_register_id" jdbcType="INTEGER" property="patientRegisterId" />
+    <result column="doctor_id" jdbcType="INTEGER" property="doctorId" />
+    <result column="bed_info_id" jdbcType="INTEGER" property="bedInfoId" />
+    <result column="bond" jdbcType="INTEGER" property="bond" />
+    <result column="operation_user_id" jdbcType="INTEGER" property="operationUserId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="patient_address" jdbcType="VARCHAR" property="patientAddress" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hospitalization_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.tian.entity.HospitalizationInfo" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  <insert id="insert" parameterType="com.tian.entity.HospitalizationInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into hospitalization_info (patient_register_id, doctor_id, bed_info_id, 
-      bond,patient_address, operation_user_id, `status`,
-      create_time, update_time)
+      bond, operation_user_id, `status`, 
+      create_time, update_time, patient_address
+      )
     values (#{patientRegisterId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, #{bedInfoId,jdbcType=INTEGER}, 
-      #{bond,jdbcType=INTEGER},#{patientAddress,jdbcType=VARCHAR}, #{operationUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{bond,jdbcType=INTEGER}, #{operationUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{patientAddress,jdbcType=VARCHAR}
+      )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.tian.entity.HospitalizationInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.HospitalizationInfo">
     update hospitalization_info
     set patient_register_id = #{patientRegisterId,jdbcType=INTEGER},
       doctor_id = #{doctorId,jdbcType=INTEGER},
       bed_info_id = #{bedInfoId,jdbcType=INTEGER},
       bond = #{bond,jdbcType=INTEGER},
-      patient_address = #{patientAddress,jdbcType=VARCHAR},
       operation_user_id = #{operationUserId,jdbcType=INTEGER},
       `status` = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      patient_address = #{patientAddress,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, patient_register_id, doctor_id, bed_info_id, bond,patient_address, operation_user_id,
-    `status`, create_time, update_time
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, patient_register_id, doctor_id, bed_info_id, bond, operation_user_id, 
+    `status`, create_time, update_time, patient_address
     from hospitalization_info
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, patient_register_id, doctor_id, bed_info_id, bond,patient_address, operation_user_id,
-    `status`, create_time, update_time
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, patient_register_id, doctor_id, bed_info_id, bond, operation_user_id, 
+    `status`, create_time, update_time, patient_address
     from hospitalization_info
   </select>
 </mapper>
