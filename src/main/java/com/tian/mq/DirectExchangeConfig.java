@@ -18,6 +18,20 @@ import org.springframework.context.annotation.Configuration;
 public class DirectExchangeConfig {
 
     @Bean
+    public Queue drugInfoOperationLogQueue() {
+        return new Queue(QueueEnum.DRUG_INFO_OPERATION_LOG.getQueueName(), true);
+    }
+
+    @Bean
+    public DirectExchange drugInfoOperationLogDirectExchange() {
+        return new DirectExchange(QueueEnum.DRUG_INFO_OPERATION_LOG.getExchange(), true, false);
+    }
+    @Bean
+    public Binding bindingDirectExchange4drugInfoOperationLog(Queue drugInfoOperationLogQueue, DirectExchange drugInfoOperationLogDirectExchange) {
+        return BindingBuilder.bind(drugInfoOperationLogQueue).to(drugInfoOperationLogDirectExchange).with(QueueEnum.DRUG_INFO_OPERATION_LOG.getRouteKey());
+    }
+
+    @Bean
     public Queue loginLogQueue() {
         return new Queue(QueueEnum.LOGIN_LOG.getQueueName(), true);
     }

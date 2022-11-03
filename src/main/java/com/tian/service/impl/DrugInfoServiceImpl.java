@@ -1,8 +1,11 @@
 package com.tian.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.tian.entity.*;
 import com.tian.enums.StatusEnum;
 import com.tian.mapper.*;
+import com.tian.mq.RabbitMqClient;
+import com.tian.service.AsyncService;
 import com.tian.service.DrugInfoService;
 import io.netty.util.internal.StringUtil;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,10 @@ public class DrugInfoServiceImpl implements DrugInfoService {
     private DrugProductAddressInfoMapper drugProductAddressInfoMapper;
     @Resource
     private StorageInOrderInfoMapper storageInOrderInfoMapper;
+    @Resource
+    private RabbitMqClient rabbitMqClient;
+    @Resource
+    private AsyncService asyncService;
 
     @Override
     public List<DrugInfo> list(DrugInfo drugInfo) {
@@ -51,13 +58,13 @@ public class DrugInfoServiceImpl implements DrugInfoService {
         Map<Integer, String> drugTypeInfoListMap = drugTypeInfoList.stream().collect(Collectors.toMap(DrugTypeInfo::getId, DrugTypeInfo::getDrugTypeName));
 
         for (DrugInfo drugInfo1 : drugInfoList) {
-            drugInfo1.setUnitName(unitInfoListMap.get(drugInfo1.getUnit()));
-            drugInfo1.setDrugTypeName(drugTypeInfoListMap.get(drugInfo1.getDrugTypeId()));
+            drugInfo1.setUnitId(drugInfo1.getUnitId());
+            drugInfo1.setDrugTypeId(drugInfo1.getDrugTypeId());
             drugInfo1.setPrice(drugInfo1.getPrice());
             StorageInOrderInfo record = new StorageInOrderInfo();
             record.setDrugId(drugInfo1.getId());
             Integer sum = storageInOrderInfoMapper.storageSum(record);
-            drugInfo1.setNumber(sum == null ? 0 : sum);
+//            drugInfo1.setNumber(sum == null ? 0 : sum);
         }
         return drugInfoList;
     }
@@ -68,14 +75,17 @@ public class DrugInfoServiceImpl implements DrugInfoService {
         if (count > 0) {
             return drugInfo.getDrugName() + "已存在";
         }
-        Date date = new Date();
-        drugInfo.setCreateTime(date);
-        drugInfo.setUpdateTime(date);
         drugInfo.setPrice(drugInfo.getPrice());
         drugInfo.setStatus(StatusEnum.normal.getCode());
-        drugInfo.setOperationUserId(user.getUserid());
         int flag = drugInfoMapper.insert(drugInfo);
         if (flag == 1) {
+            DrugInfoOperationLog drugInfoOperationLog = new DrugInfoOperationLog();
+            drugInfoOperationLog.setCreateTime(new Date());
+            drugInfoOperationLog.setOperationUserId(user.getUserid());
+            drugInfoOperationLog.setBeforeContent(null);
+            drugInfoOperationLog.setAfterContent(JSON.toJSONString(drugInfo));
+            rabbitMqClient.sendDrugInfoOperationLog(drugInfoOperationLog);
+//            asyncService.executeAsyncDrugInfoOperationLog(new Date(), user.getUserid(), null, JSON.toJSONString(drugInfo));
             return "添加成功";
         }
         return "添加失败";
@@ -85,13 +95,10 @@ public class DrugInfoServiceImpl implements DrugInfoService {
     public String edit(DrugInfo drugInfo, User user) {
         DrugInfo drugInfoOld = drugInfoMapper.selectByPrimaryKey(drugInfo.getId());
         Date date = new Date();
-        drugInfoOld.setUpdateTime(date);
-        drugInfoOld.setOperationUserId(user.getUserid());
         drugInfoOld.setDrugName(drugInfo.getDrugName());
         drugInfoOld.setPrice(drugInfo.getPrice());
-        drugInfoOld.setUnit(drugInfo.getUnit());
+        drugInfoOld.setUnitId(drugInfo.getUnitId());
         drugInfoOld.setDrugTypeId(drugInfo.getDrugTypeId());
-        drugInfoOld.setProductAddress(drugInfo.getProductAddress());
         int flag = drugInfoMapper.updateByPrimaryKey(drugInfoOld);
         if (flag == 1) {
             return "修改成功";
@@ -103,9 +110,7 @@ public class DrugInfoServiceImpl implements DrugInfoService {
     public String delete(Integer id, User user) {
         DrugInfo drugInfoOld = drugInfoMapper.selectByPrimaryKey(id);
         Date date = new Date();
-        drugInfoOld.setUpdateTime(date);
-        drugInfoOld.setOperationUserId(user.getUserid());
-        int flag = drugInfoMapper.deleteByPrimaryKey(drugInfoOld);
+        int flag = drugInfoMapper.deleteByPrimaryKey(drugInfoOld.getId());
         if (flag == 1) {
             return "删除成功";
         }

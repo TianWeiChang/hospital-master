@@ -68,8 +68,8 @@ public class StorageInOrderInfoServiceImpl implements StorageInOrderInfoService 
             DrugInfo drugInfo = drugInfoMap.get(storageInOrder.getDrugId());
 
 
-            storageInOrderInfoRespDto.setProductAddress(drugInfo.getProductAddress());
-            storageInOrderInfoRespDto.setUnitName(unitInfoListMap.get(drugInfo.getUnit()));
+            /*storageInOrderInfoRespDto.setProductAddress(drugInfo.getProductAddress());
+            storageInOrderInfoRespDto.setUnitName(unitInfoListMap.get(drugInfo.getUnit()));*/
             storageInOrderInfoRespDto.setDrugTypeName(drugTypeInfoListMap.get(drugInfo.getDrugTypeId()));
 
             storageInOrderInfoRespDto.setProductDateStr(DateUtil.format(storageInOrder.getProductDate(), DateUtil.DATEFORMATDAY));
@@ -106,7 +106,7 @@ public class StorageInOrderInfoServiceImpl implements StorageInOrderInfoService 
         storageInOrderInfo.setSupplierName(storageInOrderInfoDto.getSupplierName());
         storageInOrderInfo.setWarehouseName(storageInOrderInfoDto.getWarehouseName());
         storageInOrderInfo.setWholeSalePrice(storageInOrderInfoDto.getTradePrice());
-        storageInOrderInfo.setUnit(drugInfo.getUnit());
+        /*storageInOrderInfo.setUnit(drugInfo.getUnit());*/
 
         Date date = DateUtil.getSysDate();
         storageInOrderInfo.setCreateTime(date);

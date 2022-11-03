@@ -1,10 +1,15 @@
 package com.tian.mq;
 
+import com.tian.entity.DrugInfoOperationLog;
 import com.tian.entity.PrescriptionPricing;
+import com.tian.mapper.DrugInfoOperationLogMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+
 /**
  * @author tianwc  公众号：java后端技术全栈、面试专栏
  * @version 1.0.0
@@ -14,6 +19,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class DirectQueueListener {
+
+    @Resource
+    private DrugInfoOperationLogMapper drugInfoOperationLogMapper;
 
     /**
      *  可以创建一个表，用来记录日志信息
@@ -27,6 +35,15 @@ public class DirectQueueListener {
          * 把日志信息录入到相应的数据库表中
          */
         log.info("医生【登录】日志记录  :{} " , testMessage);
+    }
+
+    @RabbitHandler
+    @RabbitListener(queues = MqConstants.DRUG_INFO_OPERATION_LOG)
+    public void drugInfoOperationLog(DrugInfoOperationLog message) {
+        log.info("药品字典信息操作日志记录  :{} " , message);
+        if(message!=null){
+            drugInfoOperationLogMapper.insert(message);
+        }
     }
 
     @RabbitHandler

@@ -1,72 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tian.mapper.DrugInfoMapper">
-  <resultMap id="BaseResultMap" type="com.tian.entity.DrugInfo">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="drug_name" jdbcType="VARCHAR" property="drugName" />
-    <result column="product_address" jdbcType="VARCHAR" property="productAddress" />
-    <result column="operation_user_id" jdbcType="INTEGER" property="operationUserId" />
-    <result column="unit" jdbcType="INTEGER" property="unit" />
-    <result column="price" jdbcType="INTEGER" property="price" />
-    <result column="drug_type_id" jdbcType="INTEGER" property="drugTypeId" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.DrugInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.entity.DrugInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="drug_name" property="drugName" jdbcType="VARCHAR" />
+    <result column="product_address_id" property="productAddressId" jdbcType="INTEGER" />
+    <result column="unit_id" property="unitId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="drug_type_id" property="drugTypeId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="com.tian.entity.DrugInfo">
-    update drug_info
-    set
-    `status` =1,
-    operation_user_id = #{operationUserId,jdbcType=INTEGER},
-    update_time = #{updateTime,jdbcType=TIMESTAMP}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update  drug_info
+    set  `status` = 1
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.tian.entity.DrugInfo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+  <insert id="insert" parameterType="com.tian.entity.DrugInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into drug_info (drug_name, product_address, operation_user_id, 
-      unit, price, drug_type_id, 
-      `status`, create_time, update_time
+    insert into drug_info (drug_name, product_address_id, unit_id, 
+      price, drug_type_id, `status`
       )
-    values (#{drugName,jdbcType=VARCHAR}, #{productAddress,jdbcType=VARCHAR}, #{operationUserId,jdbcType=INTEGER}, 
-      #{unit,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{drugTypeId,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    values (#{drugName,jdbcType=VARCHAR}, #{productAddressId,jdbcType=INTEGER}, #{unitId,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{drugTypeId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.tian.entity.DrugInfo">
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.DrugInfo" >
     update drug_info
     set drug_name = #{drugName,jdbcType=VARCHAR},
-      product_address = #{productAddress,jdbcType=VARCHAR},
-      operation_user_id = #{operationUserId,jdbcType=INTEGER},
-      unit = #{unit,jdbcType=INTEGER},
+      product_address_id = #{productAddressId,jdbcType=INTEGER},
+      unit_id = #{unitId,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
       drug_type_id = #{drugTypeId,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      `status` = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, drug_name, product_address, operation_user_id, unit, price, drug_type_id, 
-    `status`, create_time, update_time
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, drug_name, product_address_id, unit_id, price, drug_type_id, `status`
     from drug_info
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, drug_name, product_address, operation_user_id, unit, price, drug_type_id, 
-    `status`, create_time, update_time
-    from drug_info
-    where `status`=0
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, drug_name, product_address_id, unit_id, price, drug_type_id, `status`
+    where `status` == 0
     <if test="drugName!=null">
-    and drug_name like '%' #{drugName,jdbcType=VARCHAR} '%'
+      ADN drug_name = #{drugName,jdbcType=VARCHAR}
     </if>
+    from drug_info
   </select>
 
-  <select id="count" resultType="int">
+  <select id="count" resultType="int" >
     select count(1)
     from drug_info
     where `status` = 0
     <if test="drugName!=null">
-      and drug_name = #{drugName,jdbcType=VARCHAR}
+      AND drug_name = #{drugName,jdbcType=VARCHAR}
     </if>
   </select>
 </mapper>

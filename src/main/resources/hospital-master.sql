@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80022
 File Encoding         : 65001
 
-Date: 2022-10-29 12:37:01
+Date: 2022-11-03 23:09:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,7 +94,7 @@ CREATE TABLE `doctor_info` (
   `create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '变更时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='挂号类型表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='挂号类型表';
 
 -- ----------------------------
 -- Records of doctor_info
@@ -103,6 +103,7 @@ INSERT INTO `doctor_info` VALUES ('1', '内科专家医生', '1', '1', '1', '1',
 INSERT INTO `doctor_info` VALUES ('2', '门诊部医生', '1', '1', '0', '1', '0', '2022-10-19 22:07:28', '2022-10-19 22:07:28');
 INSERT INTO `doctor_info` VALUES ('3', '张三', '1', '2', '1', '1', '0', '2022-10-23 18:26:49', '2022-10-23 18:26:49');
 INSERT INTO `doctor_info` VALUES ('4', '王五', '3', '1', '1', '1', '0', '2022-10-23 18:31:21', '2022-10-23 18:31:21');
+INSERT INTO `doctor_info` VALUES ('5', 'tian', '3', '1', '0', '1', '0', '2022-11-01 16:21:57', '2022-11-01 16:21:57');
 
 -- ----------------------------
 -- Table structure for `drug_info`
@@ -111,23 +112,43 @@ DROP TABLE IF EXISTS `drug_info`;
 CREATE TABLE `drug_info` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '唯一主键',
   `drug_name` varchar(255) NOT NULL COMMENT '药品名称',
-  `product_address` varchar(255) NOT NULL COMMENT '生产地址',
-  `operation_user_id` int NOT NULL COMMENT '操作人员id',
-  `unit` int NOT NULL COMMENT '单位',
-  `price` int NOT NULL COMMENT '价格',
+  `product_address_id` int NOT NULL COMMENT '鑽搧浜у湴琛╥d',
+  `unit_id` int NOT NULL COMMENT '计量单位表id',
+  `price` int NOT NULL COMMENT '价格表',
   `drug_type_id` int NOT NULL COMMENT '药品类型ID',
   `status` int NOT NULL COMMENT '状态，0：正常，1：已删除',
-  `create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '变更时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='药品信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='药品字典表';
 
 -- ----------------------------
 -- Records of drug_info
 -- ----------------------------
-INSERT INTO `drug_info` VALUES ('1', '板蓝根', '云南', '1', '1', '1500', '1', '0', '2022-10-21 11:06:45', '2022-10-21 11:06:46');
-INSERT INTO `drug_info` VALUES ('2', '头痛粉', '湖南', '1', '3', '500', '1', '0', '2022-10-24 21:20:05', '2022-10-24 21:20:05');
-INSERT INTO `drug_info` VALUES ('3', 'ct', '湛江', '1', '2', '150', '3', '0', '2022-10-25 14:29:37', '2022-10-25 14:29:38');
+INSERT INTO `drug_info` VALUES ('4', '板蓝根', '3', '1', '10', '1', '0');
+INSERT INTO `drug_info` VALUES ('5', '老鼠屎', '4', '3', '1', '2', '0');
+INSERT INTO `drug_info` VALUES ('6', '板蓝根1号', '2', '1', '10', '1', '0');
+INSERT INTO `drug_info` VALUES ('7', '板蓝根2号', '4', '1', '10', '1', '0');
+INSERT INTO `drug_info` VALUES ('8', '板蓝根3号', '3', '1', '10', '1', '0');
+INSERT INTO `drug_info` VALUES ('9', '22', '1', '1', '1', '1', '0');
+INSERT INTO `drug_info` VALUES ('10', '板蓝根5号', '4', '1', '10', '1', '0');
+
+-- ----------------------------
+-- Table structure for `drug_info_operation_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `drug_info_operation_log`;
+CREATE TABLE `drug_info_operation_log` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '唯一主键',
+  `operation_user_id` int NOT NULL COMMENT '操作人员id',
+  `before_content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '鍙樻洿鍓嶅唴瀹?',
+  `after_content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '閸欐ɑ娲块崥搴″敶鐎?',
+  `create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='药品字典变更日志记录表';
+
+-- ----------------------------
+-- Records of drug_info_operation_log
+-- ----------------------------
+INSERT INTO `drug_info_operation_log` VALUES ('1', '1', null, '{\"drugName\":\"老鼠屎\",\"drugTypeId\":2,\"id\":5,\"price\":1,\"productAddressId\":4,\"status\":0,\"unitId\":3}', '2022-11-03 21:56:18');
+INSERT INTO `drug_info_operation_log` VALUES ('2', '1', null, '{\"drugName\":\"板蓝根5号\",\"drugTypeId\":1,\"id\":10,\"price\":10,\"productAddressId\":4,\"status\":0,\"unitId\":1}', '2022-11-03 22:56:06');
 
 -- ----------------------------
 -- Table structure for `drug_product_address_info`
@@ -173,6 +194,28 @@ CREATE TABLE `drug_type_info` (
 INSERT INTO `drug_type_info` VALUES ('1', '口服', '1', '0', '2022-10-20 19:32:02', '2022-10-20 19:32:02');
 INSERT INTO `drug_type_info` VALUES ('2', '外敷', '1', '0', '2022-10-20 19:32:12', '2022-10-20 19:32:12');
 INSERT INTO `drug_type_info` VALUES ('3', '仪器', '1', '0', '2022-10-25 14:28:29', '2022-10-25 14:28:29');
+
+-- ----------------------------
+-- Table structure for `hospitalization_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `hospitalization_info`;
+CREATE TABLE `hospitalization_info` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '唯一主键',
+  `patient_register_id` int NOT NULL COMMENT '挂号信息id',
+  `doctor_id` int NOT NULL COMMENT '医生id',
+  `bed_info_id` int NOT NULL COMMENT '床位id',
+  `bond` int NOT NULL COMMENT '保证金',
+  `operation_user_id` int NOT NULL COMMENT '操作人员id',
+  `status` int NOT NULL COMMENT '状态，0：正常，1：已删除',
+  `create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '住院时间',
+  `update_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '信息变更时间',
+  `patient_address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='住院表';
+
+-- ----------------------------
+-- Records of hospitalization_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `my_test`
@@ -272,7 +315,7 @@ CREATE TABLE `patient_info` (
   `create_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '鍒涘缓鏃堕棿',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '鍙樻洿鏃堕棿',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of patient_info
@@ -283,6 +326,7 @@ INSERT INTO `patient_info` VALUES ('6', '王霞', '1', '22', '544449199505141253
 INSERT INTO `patient_info` VALUES ('7', '星期44', '1', '21', '432156199601041254', '18257163652', '1', '2022-10-27 19:31:11', '2022-10-27 19:31:11');
 INSERT INTO `patient_info` VALUES ('8', '张飞', '1', '50', '432****52', '182****24', null, '2022-10-28 21:43:52', '2022-10-28 21:43:52');
 INSERT INTO `patient_info` VALUES ('9', '刘备', '1', '45', '541****45', '158****51', null, '2022-10-28 22:41:42', '2022-10-28 22:41:42');
+INSERT INTO `patient_info` VALUES ('10', '杨六', '0', '22', '432****24', '182****41', null, '2022-10-29 19:34:21', '2022-10-29 19:34:21');
 
 -- ----------------------------
 -- Table structure for `patient_register`
@@ -302,7 +346,7 @@ CREATE TABLE `patient_register` (
   `create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '变更时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of patient_register
@@ -311,6 +355,7 @@ INSERT INTO `patient_register` VALUES ('3', '6', '王霞', '1', '1', '1', '穷�
 INSERT INTO `patient_register` VALUES ('4', '7', '星期44', '1', '1', '1', '星期444的处方病因', 'null | 检查没问题', '1', '0', '2022-10-27 19:31:11', '2022-10-27 20:10:15');
 INSERT INTO `patient_register` VALUES ('5', '8', '张飞', '1', '1', '1', '1', 'null | 1', '1', '0', '2022-10-28 21:43:52', '2022-10-28 22:00:15');
 INSERT INTO `patient_register` VALUES ('6', '9', '刘备', '1', '1', '1', '1111', 'null | 啊啊啊', '1', '0', '2022-10-28 22:41:42', '2022-10-28 22:48:06');
+INSERT INTO `patient_register` VALUES ('7', '10', '杨六', '1', '1', '1', '穷病', 'null | 一切正常，就是特别穷', '1', '0', '2022-10-29 19:34:21', '2022-10-29 19:36:38');
 
 -- ----------------------------
 -- Table structure for `prescription_pricing`
@@ -332,7 +377,7 @@ CREATE TABLE `prescription_pricing` (
   `create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '变更时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='处方划价';
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='处方划价';
 
 -- ----------------------------
 -- Records of prescription_pricing
@@ -350,6 +395,8 @@ INSERT INTO `prescription_pricing` VALUES ('25', '板蓝根', '5', '1', '1500', 
 INSERT INTO `prescription_pricing` VALUES ('26', 'CT', '5', '1', '150', '150', '1', '1', '1', '2', '1', '0', '2022-10-28 21:59:59', '2022-10-28 22:00:15');
 INSERT INTO `prescription_pricing` VALUES ('27', '板蓝根', '6', '1', '1500', '1500', null, null, '1', '1', '1', '0', '2022-10-28 22:49:36', '2022-10-28 22:49:36');
 INSERT INTO `prescription_pricing` VALUES ('28', 'CT', '6', '1', '150', '150', '1', '啊啊啊', '1', '2', '1', '0', '2022-10-28 22:46:39', '2022-10-28 22:48:06');
+INSERT INTO `prescription_pricing` VALUES ('29', '板蓝根', '7', '10', '1500', '15000', null, null, '1', '1', '1', '0', '2022-10-29 19:36:50', '2022-10-29 19:36:50');
+INSERT INTO `prescription_pricing` VALUES ('30', 'CT', '7', '1', '150', '150', '1', '一切正常，就是特别穷', '1', '2', '1', '0', '2022-10-29 19:36:17', '2022-10-29 19:36:38');
 
 -- ----------------------------
 -- Table structure for `project_big_type`
@@ -441,16 +488,17 @@ CREATE TABLE `storage_in_order_info` (
   `create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '变更时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单表';
 
 -- ----------------------------
 -- Records of storage_in_order_info
 -- ----------------------------
 INSERT INTO `storage_in_order_info` VALUES ('1', '仓库', '1', '板蓝根', '1', '阿里', '诸葛亮', '10', '15', '-1', '1', '2022-10-17', '2022-10-30', '1', '0', '2022-10-23 11:14:20', '2022-10-23 11:14:20');
-INSERT INTO `storage_in_order_info` VALUES ('2', '仓库', '1', '板蓝根', '1', '阿里', '诸葛亮', '14', '15', '2', '1', '2022-10-16', '2022-10-26', '1', '0', '2022-10-23 11:23:33', '2022-10-23 11:23:33');
-INSERT INTO `storage_in_order_info` VALUES ('3', '仓库', '1', '板蓝根', '1', '阿里', '鲁肃', '13', '15', '5', '1', '2022-10-17', '2022-10-27', '1', '0', '2022-10-23 11:25:15', '2022-10-23 11:25:15');
+INSERT INTO `storage_in_order_info` VALUES ('2', '仓库', '1', '板蓝根', '1', '阿里', '诸葛亮', '14', '15', '-8', '1', '2022-10-16', '2022-10-26', '1', '0', '2022-10-23 11:23:33', '2022-10-23 11:23:33');
+INSERT INTO `storage_in_order_info` VALUES ('3', '仓库', '1', '板蓝根', '1', '阿里', '鲁肃', '13', '15', '4', '1', '2022-10-17', '2022-10-27', '1', '0', '2022-10-23 11:25:15', '2022-10-23 11:25:15');
 INSERT INTO `storage_in_order_info` VALUES ('4', '仓库', '1', '头痛粉', '2', '阿里', '诸葛亮', '3', '500', '5', '3', '2022-10-23', '2022-10-26', '1', '0', '2022-10-24 21:50:01', '2022-10-24 21:50:01');
 INSERT INTO `storage_in_order_info` VALUES ('5', '仓库', '3', 'ct', '3', '仁和', '苗哥', '100', '150', '10', '2', '2022-10-01', '2023-05-12', '1', '0', '2022-10-25 14:30:46', '2022-10-25 14:30:46');
+INSERT INTO `storage_in_order_info` VALUES ('6', '仓库', '1', '板蓝根', '1', '阿里', '诸葛亮', '10', '1500', '100', '1', '2022-10-14', '2022-10-31', '1', '0', '2022-10-29 19:35:27', '2022-10-29 19:35:27');
 
 -- ----------------------------
 -- Table structure for `supplier_info`

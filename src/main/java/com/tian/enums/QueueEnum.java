@@ -16,6 +16,10 @@ public enum QueueEnum {
      */
     LOGIN_LOG(MqConstants.LOGIN_LOG, MqConstants.LOGIN_LOG, MqConstants.LOGIN_LOG),
     /**
+     * 药品字典信息操作日志
+     */
+    DRUG_INFO_OPERATION_LOG(MqConstants.DRUG_INFO_OPERATION_LOG, MqConstants.DRUG_INFO_OPERATION_LOG, MqConstants.DRUG_INFO_OPERATION_LOG),
+    /**
      * 添加医生日志
      */
     DOCTOR_ADD_LOG(MqConstants.DOCTOR_ADD_LOG, MqConstants.DOCTOR_ADD_LOG, MqConstants.DOCTOR_ADD_LOG),

@@ -159,6 +159,7 @@
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
                 </configuration>
+                <!--注释掉代码生成器 需要生成代码时 再放开-->
                 <executions>
                     <execution>
                         <id>Generate MyBatis Artifacts</id>

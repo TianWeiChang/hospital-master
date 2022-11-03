@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface DrugInfoMapper {
-    int deleteByPrimaryKey(DrugInfo drugInfo);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(DrugInfo record);
 

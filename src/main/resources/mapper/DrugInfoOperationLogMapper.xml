@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.DrugInfoOperationLogMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.entity.DrugInfoOperationLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER" />
+    <result column="before_content" property="beforeContent" jdbcType="VARCHAR" />
+    <result column="after_content" property="afterContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from drug_info_operation_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tian.entity.DrugInfoOperationLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into drug_info_operation_log (operation_user_id, before_content, after_content, 
+      create_time)
+    values (#{operationUserId,jdbcType=INTEGER}, #{beforeContent,jdbcType=VARCHAR}, #{afterContent,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.DrugInfoOperationLog" >
+    update drug_info_operation_log
+    set operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      before_content = #{beforeContent,jdbcType=VARCHAR},
+      after_content = #{afterContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, operation_user_id, before_content, after_content, create_time
+    from drug_info_operation_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, operation_user_id, before_content, after_content, create_time
+    from drug_info_operation_log
+  </select>
+</mapper>

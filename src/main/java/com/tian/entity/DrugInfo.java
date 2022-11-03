@@ -1,37 +1,23 @@
 package com.tian.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class DrugInfo implements Serializable {
     private Integer id;
 
     private String drugName;
 
-    private String productAddress;
+    private Integer productAddressId;
 
-    private Date productTime;
-
-    //显示用
-    private Integer number;
+    private Integer unitId;
 
     private Integer price;
 
-    private Integer operationUserId;
-
-    private Integer unit;
-
-    private String unitName;
-
     private Integer drugTypeId;
-
-    private String drugTypeName;
 
     private Integer status;
 
-    private Date createTime;
-
-    private Date updateTime;
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -46,31 +32,23 @@ public class DrugInfo implements Serializable {
     }
 
     public void setDrugName(String drugName) {
-        this.drugName = drugName;
+        this.drugName = drugName == null ? null : drugName.trim();
     }
 
-    public String getProductAddress() {
-        return productAddress;
+    public Integer getProductAddressId() {
+        return productAddressId;
     }
 
-    public void setProductAddress(String productAddress) {
-        this.productAddress = productAddress;
+    public void setProductAddressId(Integer productAddressId) {
+        this.productAddressId = productAddressId;
     }
 
-    public Date getProductTime() {
-        return productTime;
+    public Integer getUnitId() {
+        return unitId;
     }
 
-    public void setProductTime(Date productTime) {
-        this.productTime = productTime;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setUnitId(Integer unitId) {
+        this.unitId = unitId;
     }
 
     public Integer getPrice() {
@@ -79,22 +57,6 @@ public class DrugInfo implements Serializable {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public Integer getOperationUserId() {
-        return operationUserId;
-    }
-
-    public void setOperationUserId(Integer operationUserId) {
-        this.operationUserId = operationUserId;
-    }
-
-    public Integer getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Integer unit) {
-        this.unit = unit;
     }
 
     public Integer getDrugTypeId() {
@@ -113,55 +75,21 @@ public class DrugInfo implements Serializable {
         this.status = status;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUnitName() {
-        return unitName;
-    }
-
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
-    }
-
-    public String getDrugTypeName() {
-        return drugTypeName;
-    }
-
-    public void setDrugTypeName(String drugTypeName) {
-        this.drugTypeName = drugTypeName;
-    }
-
     @Override
     public String toString() {
-        return "DrugInfo{" +
-                "id=" + id +
-                ", drugName='" + drugName + '\'' +
-                ", productAddress='" + productAddress + '\'' +
-                ", productTime=" + productTime +
-                ", number=" + number +
-                ", price=" + price +
-                ", operationUserId=" + operationUserId +
-                ", unit=" + unit +
-                ", unitName=" + unitName +
-                ", drugTypeId=" + drugTypeId +
-                ", drugTypeName=" + drugTypeName +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", drugName=").append(drugName);
+        sb.append(", productAddressId=").append(productAddressId);
+        sb.append(", unitId=").append(unitId);
+        sb.append(", price=").append(price);
+        sb.append(", drugTypeId=").append(drugTypeId);
+        sb.append(", status=").append(status);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

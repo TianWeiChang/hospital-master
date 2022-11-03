@@ -18,7 +18,8 @@ import java.util.List;
  * @author tianwc  公众号：java后端技术全栈、面试专栏
  * @version 1.0.0
  * @date 2022年10月20日 23:16
- * 药品信息
+ * <p>
+ * 药品字典信息
  */
 @Controller
 @RequestMapping("/drug/info")
@@ -45,9 +46,6 @@ public class DrugInfoController {
     @RequestMapping("/add")
     @ResponseBody
     public Object add(DrugInfo drugInfo, HttpServletRequest request) {
-        /*
-         * TODO: 2022/10/20 key-value没有处理好
-         */
         //获取用户登陆id根据不同的用户有不停菜单
         User user = (User) request.getSession().getAttribute("user");
         return drugInfoService.add(drugInfo, user);

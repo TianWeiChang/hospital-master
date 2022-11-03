@@ -46,7 +46,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">单位:</label>
             <div class="layui-input-inline">
-                <select name="unit" id="unitName" lay-verify="required" lay-filter="xmFilter">
+                <select name="unitId" id="unitId" lay-verify="required" lay-filter="xmFilter">
                 <option value=""></option>
                 </select>
             </div>
@@ -65,7 +65,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">产地:</label>
                 <div class="layui-input-inline">
-                    <select name="productAddress" id="productAddress" lay-verify="required" lay-filter="xmFilter">
+                    <select name="productAddressId" id="productAddressId" lay-verify="required" lay-filter="xmFilter">
                         <option value=""></option>
                     </select>
                 </div>
@@ -171,7 +171,7 @@
 
         var url;
         var mainIndex;
-        //打开添加页面
+        //打开 添加 页面
         function openAddSdrugdictionary(){
             mainIndex=layer.open({
                 type:1,
@@ -217,7 +217,7 @@
             type: 'post',
             success: function (data) {
                 $.each(data, function (index, item) {
-                    $('#productAddress').append(new Option(item.drugProductAddressName, item.drugProductAddressName));// 下拉菜单里添加元素
+                    $('#productAddressId').append(new Option(item.drugProductAddressName, item.id));// 下拉菜单里添加元素
                 });
                 layui.form.render("select");//重新渲染 固定写法
             }
@@ -228,7 +228,7 @@
             type: 'post',
             success: function (data) {
                 $.each(data, function (index, item) {
-                    $('#unitName').append(new Option(item.unitName, item.id));// 下拉菜单里添加元素
+                    $('#unitId').append(new Option(item.unitName, item.id));// 下拉菜单里添加元素
                 });
                 layui.form.render("select");//重新渲染 固定写法
             }

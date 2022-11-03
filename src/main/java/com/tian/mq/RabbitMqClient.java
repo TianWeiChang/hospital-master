@@ -1,5 +1,7 @@
 package com.tian.mq;
 
+import com.tian.entity.DrugInfoOperationLog;
+import com.tian.entity.User;
 import com.tian.enums.QueueEnum;
 import com.tian.mq.message.PrescriptionPricingMsg;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -26,16 +28,17 @@ public class RabbitMqClient {
 
     /**
      * 登录日志
+     *
      * @param message
      */
-    public void loginLog(String message){
+    public void loginLog(User message) {
         rabbitTemplate.convertAndSend(QueueEnum.LOGIN_LOG.getExchange(), QueueEnum.LOGIN_LOG.getRouteKey(), message);
     }
 
     /**
      * 系统 添加医生 操作日志
      */
-    public void doctorAddLog(String message){
+    public void doctorAddLog(String message) {
         rabbitTemplate.convertAndSend(QueueEnum.DOCTOR_ADD_LOG.getExchange(), QueueEnum.DOCTOR_ADD_LOG.getRouteKey(), message);
     }
 
@@ -47,7 +50,12 @@ public class RabbitMqClient {
     /**
      * 系统 添加医生 操作日志
      */
-    public void sendPrescriptionPricing(PrescriptionPricingMsg message){
+    public void sendPrescriptionPricing(PrescriptionPricingMsg message) {
         rabbitTemplate.convertAndSend(QueueEnum.PRICING_LOG.getExchange(), QueueEnum.PRICING_LOG.getRouteKey(), message);
     }
+
+    public void sendDrugInfoOperationLog(DrugInfoOperationLog message) {
+        rabbitTemplate.convertAndSend(QueueEnum.DRUG_INFO_OPERATION_LOG.getExchange(), QueueEnum.DRUG_INFO_OPERATION_LOG.getRouteKey(), message);
+    }
+
 }

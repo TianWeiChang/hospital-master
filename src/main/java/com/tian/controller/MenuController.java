@@ -61,7 +61,7 @@ public class MenuController extends BaseController {
 
 
             //登录日志
-            rabbitMQClient.loginLog(users.toString());
+            rabbitMQClient.loginLog(users);
 
             //把user放进session
             request.getSession().setAttribute("user", users);

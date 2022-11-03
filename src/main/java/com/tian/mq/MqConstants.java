@@ -20,4 +20,8 @@ public class MqConstants {
      * 登录操作日志
      */
     public static final String LOGIN_LOG = "login.log";
+    /**
+     * 登录操作日志
+     */
+    public static final String DRUG_INFO_OPERATION_LOG = "drug.info.operation.log";
 }
