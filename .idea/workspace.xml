@@ -4,33 +4,17 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/SpringAsyncConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/SystemInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/DrugInfoOperationLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DrugInfoOperationLogMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/AsyncService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/AsyncServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoOperationLogMapper.xml" afterDir="false" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="代码重构，药品字典添加。异步处理用了两种方式：线程池和消息队列">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/dto/DrugInfoDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/utils/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/DrugInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/DrugInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/entity/DrugInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/DrugInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/enums/QueueEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/enums/QueueEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/StorageInOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/StorageInOrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DrugInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DrugInfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mapper/HospitalizationInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/HospitalizationInfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectExchangeConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectExchangeConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/MqConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/MqConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/RabbitMqClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/RabbitMqClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/DrugInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/DrugInfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/StorageInOrderInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/StorageInOrderInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hospital-master.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hospital-master.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -460,19 +444,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DateUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.tian.utils.DateUtil" />
-      <module name="hospital-master" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.tian.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PrivacyDimmer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tian.utils.PrivacyDimmer" />
       <module name="hospital-master" />
@@ -488,6 +459,19 @@
     </configuration>
     <configuration name="StringUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tian.utils.StringUtil" />
+      <module name="hospital-master" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tian.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tian.utils.Test" />
       <module name="hospital-master" />
       <extension name="coverage">
         <pattern>
@@ -515,10 +499,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.Application" />
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.StringUtil" />
         <item itemvalue="Application.CreateRandomCode" />
         <item itemvalue="Application.PrivacyDimmer" />
-        <item itemvalue="Application.DateUtil" />
       </list>
     </recent_temporary>
   </component>
@@ -557,7 +541,8 @@
       <workItem from="1667274261774" duration="8273000" />
       <workItem from="1667347081041" duration="352000" />
       <workItem from="1667394961788" duration="599000" />
-      <workItem from="1667432570278" duration="18682000" />
+      <workItem from="1667432570278" duration="19987000" />
+      <workItem from="1667530055038" duration="18174000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -657,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667446093903</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="代码重构，药品字典添加。异步处理用了两种方式：线程池和消息队列">
+      <created>1667488223683</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1667488223683</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -690,7 +682,8 @@
     <MESSAGE value="住院管理--入院管理部分" />
     <MESSAGE value="使用MQ 可以把部分操作日志落库" />
     <MESSAGE value="代码格式优化和 自定义注解使用" />
-    <option name="LAST_COMMIT_MESSAGE" value="代码格式优化和 自定义注解使用" />
+    <MESSAGE value="代码重构，药品字典添加。异步处理用了两种方式：线程池和消息队列" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码重构，药品字典添加。异步处理用了两种方式：线程池和消息队列" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -709,16 +702,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/tian/controller/BedController.java</url>
           <line>55</line>
           <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tian/mq/RabbitMqClient.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/templates/cao/Ctoll.html</url>

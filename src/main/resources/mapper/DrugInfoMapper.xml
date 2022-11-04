@@ -41,20 +41,32 @@
     from drug_info
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="selectList" resultMap="BaseResultMap" >
     select id, drug_name, product_address_id, unit_id, price, drug_type_id, `status`
-    where `status` == 0
-    <if test="drugName!=null">
-      ADN drug_name = #{drugName,jdbcType=VARCHAR}
-    </if>
     from drug_info
+    where `status` = 0
+    <if test="drugName!=null and drugName!=''">
+      AND drug_name = #{drugName,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectPage" resultType="com.tian.dto.DrugInfoDto" >
+    select di.id, di.drug_name drugName, di.price,dti.drug_type_Name drugTypeName ,ui.unit_name unitName ,dp.drug_product_address_Name productAddress
+    from drug_info di
+    LEFT JOIN drug_type_info dti ON di.drug_type_id=dti.id
+    LEFT JOIN unit_info ui ON di.unit_id=ui.id
+    LEFT JOIN drug_product_address_info dp ON di.product_address_id=dp.id
+    where di.`status` = 0
+    <if test="drugName!=null and drugName!=''">
+      AND di.drug_name = #{drugName,jdbcType=VARCHAR}
+    </if>
   </select>
 
   <select id="count" resultType="int" >
     select count(1)
     from drug_info
     where `status` = 0
-    <if test="drugName!=null">
+    <if test="drugName!=null and drugName!=''">
       AND drug_name = #{drugName,jdbcType=VARCHAR}
     </if>
   </select>

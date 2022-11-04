@@ -1,6 +1,9 @@
 package com.tian.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.tian.dto.DrugInfoDto;
 import com.tian.entity.*;
 import com.tian.enums.StatusEnum;
 import com.tian.mapper.*;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,39 +38,12 @@ public class DrugInfoServiceImpl implements DrugInfoService {
     @Resource
     private DrugProductAddressInfoMapper drugProductAddressInfoMapper;
     @Resource
-    private StorageInOrderInfoMapper storageInOrderInfoMapper;
-    @Resource
     private RabbitMqClient rabbitMqClient;
-    @Resource
-    private AsyncService asyncService;
 
     @Override
-    public List<DrugInfo> list(DrugInfo drugInfo) {
-        if (drugInfo != null && StringUtil.isNullOrEmpty(drugInfo.getDrugName())) {
-            drugInfo.setDrugName(null);
-        }
-        List<DrugInfo> drugInfoList = drugInfoMapper.selectAll(drugInfo);
-        if (CollectionUtils.isEmpty(drugInfoList)) {
-            return drugInfoList;
-        }
-
-
-        List<UnitInfo> unitInfoList = unitInfoMapper.selectAll(null);
-        Map<Integer, String> unitInfoListMap = unitInfoList.stream().collect(Collectors.toMap(UnitInfo::getId, UnitInfo::getUnitName));
-
-        List<DrugTypeInfo> drugTypeInfoList = drugTypeInfoMapper.selectAll(null);
-        Map<Integer, String> drugTypeInfoListMap = drugTypeInfoList.stream().collect(Collectors.toMap(DrugTypeInfo::getId, DrugTypeInfo::getDrugTypeName));
-
-        for (DrugInfo drugInfo1 : drugInfoList) {
-            drugInfo1.setUnitId(drugInfo1.getUnitId());
-            drugInfo1.setDrugTypeId(drugInfo1.getDrugTypeId());
-            drugInfo1.setPrice(drugInfo1.getPrice());
-            StorageInOrderInfo record = new StorageInOrderInfo();
-            record.setDrugId(drugInfo1.getId());
-            Integer sum = storageInOrderInfoMapper.storageSum(record);
-//            drugInfo1.setNumber(sum == null ? 0 : sum);
-        }
-        return drugInfoList;
+    public PageInfo<DrugInfoDto> list(DrugInfo drugInfo) {
+        List<DrugInfoDto> drugInfoList = drugInfoMapper.selectPage(drugInfo);
+        return new PageInfo<DrugInfoDto>(drugInfoList);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tian.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tian.dto.DrugInfoDto;
 import com.tian.entity.*;
 import com.tian.service.*;
 import com.tian.utils.ReturnDataUtil;
@@ -58,8 +59,7 @@ public class StorageInOrderController {
     @ResponseBody
     public Object drugInfoList(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        List<DrugInfo> drugInfoList = drugInfoService.list(null);
-        PageInfo<DrugInfo> pageInfo = new PageInfo<>(drugInfoList);
+        PageInfo<DrugInfoDto> pageInfo  = drugInfoService.list(null);
         Map<String, Object> drugstoresData = new HashMap<>();
         //这是layui要求返回的json数据格式
         drugstoresData.put("code", 0);

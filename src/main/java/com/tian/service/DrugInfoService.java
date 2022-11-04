@@ -1,5 +1,7 @@
 package com.tian.service;
 
+import com.github.pagehelper.PageInfo;
+import com.tian.dto.DrugInfoDto;
 import com.tian.entity.*;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public interface DrugInfoService {
     /**
      * 药品信息列表
      */
-    List<DrugInfo> list(DrugInfo drugInfo);
+    PageInfo<DrugInfoDto> list(DrugInfo drugInfo);
 
     /**
      * 添加药品信息

@@ -2,6 +2,7 @@ package com.tian.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tian.dto.DrugInfoDto;
 import com.tian.entity.DrugInfo;
 import com.tian.entity.User;
 import com.tian.service.DrugInfoService;
@@ -34,9 +35,7 @@ public class DrugInfoController {
     @ResponseBody
     public Object list(DrugInfo drugInfo, Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        List<DrugInfo> listAll = drugInfoService.list(drugInfo);
-        PageInfo<DrugInfo> pageInfo = new PageInfo<>(listAll);
-        return ReturnDataUtil.getTableData(pageInfo);
+        return ReturnDataUtil.getTableData(drugInfoService.list(drugInfo));
     }
 
 

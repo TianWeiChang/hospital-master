@@ -1,5 +1,6 @@
 package com.tian.mapper;
 
+import com.tian.dto.DrugInfoDto;
 import com.tian.entity.DrugInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,7 +14,9 @@ public interface DrugInfoMapper {
 
     DrugInfo selectByPrimaryKey(Integer id);
 
-    List<DrugInfo> selectAll(DrugInfo drugInfo);
+    List<DrugInfo> selectList(DrugInfo drugInfo);
+
+    List<DrugInfoDto> selectPage(DrugInfo drugInfo);
 
     int updateByPrimaryKey(DrugInfo record);
 

@@ -48,7 +48,7 @@ public class StorageInOrderInfoServiceImpl implements StorageInOrderInfoService 
         List<DrugTypeInfo> drugTypeInfoList = drugTypeInfoMapper.selectAll(null);
         Map<Integer, String> drugTypeInfoListMap = drugTypeInfoList.stream().collect(Collectors.toMap(DrugTypeInfo::getId, DrugTypeInfo::getDrugTypeName));
 
-        List<DrugInfo> drugInfoList = drugInfoMapper.selectAll(null);
+        List<DrugInfo> drugInfoList = drugInfoMapper.selectList(null);
         Map<Integer, DrugInfo> drugInfoMap = drugInfoList.stream().collect(Collectors.toMap(DrugInfo::getId, Function.identity()));
 
         List<StorageInOrderInfoRespDto> storageInOrderInfoRespDtos = new ArrayList<>();
