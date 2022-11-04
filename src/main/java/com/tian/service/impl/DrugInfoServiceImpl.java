@@ -1,25 +1,21 @@
 package com.tian.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tian.dto.DrugInfoDto;
 import com.tian.entity.*;
 import com.tian.enums.StatusEnum;
-import com.tian.mapper.*;
+import com.tian.mapper.DrugInfoMapper;
+import com.tian.mapper.DrugProductAddressInfoMapper;
+import com.tian.mapper.DrugTypeInfoMapper;
+import com.tian.mapper.UnitInfoMapper;
 import com.tian.mq.RabbitMqClient;
-import com.tian.service.AsyncService;
 import com.tian.service.DrugInfoService;
-import io.netty.util.internal.StringUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author tianwc  公众号：java后端技术全栈、面试专栏
@@ -43,7 +39,7 @@ public class DrugInfoServiceImpl implements DrugInfoService {
     @Override
     public PageInfo<DrugInfoDto> list(DrugInfo drugInfo) {
         List<DrugInfoDto> drugInfoList = drugInfoMapper.selectPage(drugInfo);
-        return new PageInfo<DrugInfoDto>(drugInfoList);
+        return new PageInfo<>(drugInfoList);
     }
 
     @Override

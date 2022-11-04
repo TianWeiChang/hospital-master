@@ -1,8 +1,6 @@
 package com.tian.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.tian.dto.DrugInfoDto;
 import com.tian.entity.DrugInfo;
 import com.tian.entity.User;
 import com.tian.service.DrugInfoService;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author tianwc  公众号：java后端技术全栈、面试专栏
