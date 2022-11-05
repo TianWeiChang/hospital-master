@@ -157,7 +157,7 @@
             if(layEvent === 'del'){ //删除
                 layer.confirm('真的删除【'+data.drugName+'】这个药品吗', function(index){
                     //向服务端发送删除指令
-                    $.post("drug/info/delete",{id:data.id},function(res){
+                    $.post("drug/info/delete",{id:data.drugName},function(res){
                         layer.msg(res);
                         //刷新数据 表格
                         tableIns.reload();
@@ -187,6 +187,8 @@
         }
         //打开修改页面
         function openUpdateSdrugdictionary(data){
+            $("#productAddressId").val(data.productAddress);
+            console.log(data.productAddress);
             mainIndex=layer.open({
                 type:1,
                 title:'修改药品',

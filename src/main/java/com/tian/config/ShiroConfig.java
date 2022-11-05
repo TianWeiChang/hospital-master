@@ -53,16 +53,11 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
-
-
         Map<String, String> filtermap = new LinkedHashMap<String, String>();
         //toLogin/login界面可以未认证直接访问
-
-
         filtermap.put("/sel/login", "anon");
         filtermap.put("index.html", "anon");
         filtermap.put("/out/**", "anon");
-
 
         filtermap.put("/css/**", "anon");
         filtermap.put("/layui/**", "anon");
@@ -71,16 +66,12 @@ public class ShiroConfig {
         filtermap.put("*.png", "anon");
         filtermap.put("*jpg", "anon");
 
-
-
         //未认证都不允许通过
         filtermap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filtermap);
         //如果访问的页面未认证   跳转到登陆页面
         shiroFilterFactoryBean.setLoginUrl("/sel/toLogin");
-
-
         return shiroFilterFactoryBean;
     }
 

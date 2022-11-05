@@ -2,6 +2,7 @@ package com.tian.config;
 
 import com.tian.entity.User;
 import com.tian.service.MenuService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -16,9 +17,11 @@ import javax.annotation.Resource;
 /**
  * @author tianwc  公众号：java后端技术全栈、面试专栏
  * @version 1.0.0
- * @description 认证
- * @createTime 2022年09月16日
+ * @date 2022年09月16日
+ * <p>
+ * 认证
  */
+@Slf4j
 public class UserRealm extends AuthorizingRealm {
 
     @Resource
@@ -27,41 +30,35 @@ public class UserRealm extends AuthorizingRealm {
     @Resource
     private RedisConfig redisConfig;
 
-    /*
+    /**
      * 认证
-     * */
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         //获取的前台username
 
-        String username = (String) authenticationToken.getPrincipal();
+        String userName = (String) authenticationToken.getPrincipal();
 
         User sysUser = null;
         try {
-            sysUser = menuService.loginName(username);
+            sysUser = menuService.loginName(userName);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("查询数据库失败,error:", e);
         }
         //判断对象是否有值
         if (sysUser == null) {
+            log.error("用户信息不存在，userName={}", userName);
             return null;
         }
-
-        redisConfig.add(RedisKeyPre.USER_INFO_KEY_PRE + sysUser.getUserid(),sysUser);
+        //用户信息缓存到Redis中
+        redisConfig.add(RedisKeyPre.USER_INFO_KEY_PRE + sysUser.getUserid(), sysUser);
 
         //密码不需要我们比对，shiro会给我们比对                      //对象    //获取前台密码
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(sysUser, sysUser.getPwd(), ByteSource.Util.bytes(sysUser.getSalt()), getName());
-        return info;
-
+        return new SimpleAuthenticationInfo(sysUser, sysUser.getPwd(), ByteSource.Util.bytes(sysUser.getSalt()), getName());
     }
 
-    /*
-     * 授权
-     * */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         return null;
     }
-
-
 }

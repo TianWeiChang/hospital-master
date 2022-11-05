@@ -2,6 +2,7 @@ package com.tian.mq;
 
 import com.tian.entity.DrugInfoOperationLog;
 import com.tian.entity.PrescriptionPricing;
+import com.tian.entity.User;
 import com.tian.mapper.DrugInfoOperationLogMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -30,7 +31,7 @@ public class DirectQueueListener {
 
     @RabbitHandler
     @RabbitListener(queues = MqConstants.LOGIN_LOG)
-    public void loginLog(String testMessage) {
+    public void loginLog(User testMessage) {
         /**
          * 把日志信息录入到相应的数据库表中
          */

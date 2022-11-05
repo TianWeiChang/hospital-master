@@ -3,6 +3,7 @@ package com.tian.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tian.annotation.ArgsLogAnnotation;
+import com.tian.config.RedissonConfig;
 import com.tian.entity.DataGridView;
 import com.tian.entity.Menu;
 import com.tian.entity.TreeNode;
@@ -14,6 +15,8 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,8 @@ public class MenuController extends BaseController {
     private MenuService menuService;
     @Resource
     private RabbitMqClient rabbitMQClient;
+    @Resource
+    private RedissonClient redissonClient;
 
     /*  @Resource
       private RedisTemplate<String,User> redisTemplate;*/
@@ -52,6 +57,18 @@ public class MenuController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         //第二步：封装token  凭证
         UsernamePasswordToken token = new UsernamePasswordToken(loginname, pwd);
+
+       /* String key = token.toString();
+        RLock lock = redissonClient.getLock(key);
+
+        lock.lock();
+        try {
+            System.out.println("获取到分布式锁");
+        } finally {
+            lock.unlock();
+            System.out.println("分布式锁释放完毕");
+        }*/
+
         //第三步：登陆
         try {
             //只要能通过认证就能通过了

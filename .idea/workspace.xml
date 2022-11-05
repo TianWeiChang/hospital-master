@@ -4,17 +4,17 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="代码重构，药品字典添加。异步处理用了两种方式：线程池和消息队列">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/dto/DrugInfoDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/utils/Test.java" afterDir="false" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="代码重构：药品字典分页查询">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/RedissonConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/DrugInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/DrugInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/StorageInOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/StorageInOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DrugInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DrugInfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/DrugInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/DrugInfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/StorageInOrderInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/StorageInOrderInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/config/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/ShiroConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/config/UserRealm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/UserRealm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/doctor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -542,7 +542,8 @@
       <workItem from="1667347081041" duration="352000" />
       <workItem from="1667394961788" duration="599000" />
       <workItem from="1667432570278" duration="19987000" />
-      <workItem from="1667530055038" duration="18174000" />
+      <workItem from="1667530055038" duration="20970000" />
+      <workItem from="1667606451865" duration="6674000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -649,7 +650,28 @@
       <option name="project" value="LOCAL" />
       <updated>1667488223683</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="代码重构：药品字典分页查询">
+      <created>1667570299505</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667570299506</updated>
+    </task>
+    <task id="LOCAL-00017" summary="代码格式优化">
+      <created>1667570729528</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667570729528</updated>
+    </task>
+    <task id="LOCAL-00018" summary="文档说明补充">
+      <created>1667571837734</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1667571837734</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,7 +705,10 @@
     <MESSAGE value="使用MQ 可以把部分操作日志落库" />
     <MESSAGE value="代码格式优化和 自定义注解使用" />
     <MESSAGE value="代码重构，药品字典添加。异步处理用了两种方式：线程池和消息队列" />
-    <option name="LAST_COMMIT_MESSAGE" value="代码重构，药品字典添加。异步处理用了两种方式：线程池和消息队列" />
+    <MESSAGE value="代码重构：药品字典分页查询" />
+    <MESSAGE value="代码格式优化" />
+    <MESSAGE value="文档说明补充" />
+    <option name="LAST_COMMIT_MESSAGE" value="文档说明补充" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
