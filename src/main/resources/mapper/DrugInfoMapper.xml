@@ -52,8 +52,7 @@
 
   <select id="selectPage" resultType="com.tian.dto.DrugInfoDto" >
     select di.id, di.drug_name drugName, di.price,dti.drug_type_Name drugTypeName ,di.drug_type_id drugTypeId ,
-           di.product_address_id productAddressId,di.unit_id unitId,  ui.unit_name unitName ,
-           dp.drug_product_address_Name productAddress
+           di.product_address_id productAddressId,di.unit_id unitId,  ui.unit_name unitName , dp.drug_product_address_Name productAddress
     from drug_info di
     LEFT JOIN drug_type_info dti ON di.drug_type_id=dti.id
     LEFT JOIN unit_info ui ON di.unit_id=ui.id
