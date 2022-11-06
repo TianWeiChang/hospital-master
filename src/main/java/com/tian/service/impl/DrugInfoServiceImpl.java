@@ -67,13 +67,20 @@ public class DrugInfoServiceImpl implements DrugInfoService {
     @Override
     public String edit(DrugInfo drugInfo, User user) {
         DrugInfo drugInfoOld = drugInfoMapper.selectByPrimaryKey(drugInfo.getId());
-        Date date = new Date();
+        String beforeContent = JSON.toJSONString(drugInfoOld);
         drugInfoOld.setDrugName(drugInfo.getDrugName());
         drugInfoOld.setPrice(drugInfo.getPrice());
         drugInfoOld.setUnitId(drugInfo.getUnitId());
         drugInfoOld.setDrugTypeId(drugInfo.getDrugTypeId());
         int flag = drugInfoMapper.updateByPrimaryKey(drugInfoOld);
         if (flag == 1) {
+            //发送变更日志到MQ中
+            DrugInfoOperationLog drugInfoOperationLog = new DrugInfoOperationLog();
+            drugInfoOperationLog.setCreateTime(new Date());
+            drugInfoOperationLog.setOperationUserId(user.getUserid());
+            drugInfoOperationLog.setBeforeContent(beforeContent);
+            drugInfoOperationLog.setAfterContent(JSON.toJSONString(drugInfoOld));
+            rabbitMqClient.sendDrugInfoOperationLog(drugInfoOperationLog);
             return "修改成功";
         }
         return "修改失败";

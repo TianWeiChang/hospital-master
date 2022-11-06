@@ -146,7 +146,7 @@
         table.on("toolbar(drugdictionaryTable)",function(obj){
             switch(obj.event){
                 case 'add':
-                    openAddSdrugdictionary();
+                    openAddDrugDictionary();
                     break;
             };
         })
@@ -165,14 +165,14 @@
                 });
             } else if(layEvent === 'edit'){ //编辑
                 console.log(data.id);
-                openUpdateSdrugdictionary(data);
+                openUpdateDrugDictionary(data);
             }
         });
 
         var url;
         var mainIndex;
         //打开 添加 页面
-        function openAddSdrugdictionary(){
+        function openAddDrugDictionary(){
             mainIndex=layer.open({
                 type:1,
                 title:'添加药品',
@@ -186,9 +186,8 @@
             });
         }
         //打开修改页面
-        function openUpdateSdrugdictionary(data){
-            $("#productAddressId").val(data.productAddress);
-            console.log(data.productAddress);
+        function openUpdateDrugDictionary(data){
+            console.log(data)
             mainIndex=layer.open({
                 type:1,
                 title:'修改药品',

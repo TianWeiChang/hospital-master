@@ -8,17 +8,23 @@ package com.tian.dto;
  * 药品字典列表展示
  */
 public class DrugInfoDto {
-    private Integer id;
+        private Integer id;
 
-    private String drugName;
+        private String drugName;
 
-    private String productAddress;
+        private String productAddress;
 
-    private String unitName;
+        private String unitName;
 
-    private Integer price;
+        private Integer price;
 
-    private String drugTypeName;
+        private String drugTypeName;
+
+        private Integer drugTypeId;
+
+        private Integer productAddressId;
+
+        private Integer unitId;
 
     public Integer getId() {
         return id;
@@ -68,6 +74,30 @@ public class DrugInfoDto {
         this.drugTypeName = drugTypeName;
     }
 
+    public Integer getDrugTypeId() {
+        return drugTypeId;
+    }
+
+    public void setDrugTypeId(Integer drugTypeId) {
+        this.drugTypeId = drugTypeId;
+    }
+
+    public Integer getProductAddressId() {
+        return productAddressId;
+    }
+
+    public void setProductAddressId(Integer productAddressId) {
+        this.productAddressId = productAddressId;
+    }
+
+    public Integer getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(Integer unitId) {
+        this.unitId = unitId;
+    }
+
     @Override
     public String toString() {
         return "DrugInfoDto{" +
@@ -77,6 +107,10 @@ public class DrugInfoDto {
                 ", unitName='" + unitName + '\'' +
                 ", price=" + price +
                 ", drugTypeName='" + drugTypeName + '\'' +
+                ", drugTypeId=" + drugTypeId +
+                ", productAddressId=" + productAddressId +
+                ", unitId=" + unitId +
                 '}';
     }
 }
+

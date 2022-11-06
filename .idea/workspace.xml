@@ -4,17 +4,14 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="代码重构：药品字典分页查询">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/RedissonConfig.java" afterDir="false" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/config/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/ShiroConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/config/UserRealm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/config/UserRealm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mq/DirectQueueListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/dto/DrugInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/dto/DrugInfoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/doctor.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/type.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/type.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -543,7 +540,8 @@
       <workItem from="1667394961788" duration="599000" />
       <workItem from="1667432570278" duration="19987000" />
       <workItem from="1667530055038" duration="20970000" />
-      <workItem from="1667606451865" duration="6674000" />
+      <workItem from="1667606451865" duration="9097000" />
+      <workItem from="1667691757922" duration="3726000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -671,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667571837734</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="代码优化和说明补充">
+      <created>1667634515868</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1667634515868</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -708,7 +713,8 @@
     <MESSAGE value="代码重构：药品字典分页查询" />
     <MESSAGE value="代码格式优化" />
     <MESSAGE value="文档说明补充" />
-    <option name="LAST_COMMIT_MESSAGE" value="文档说明补充" />
+    <MESSAGE value="代码优化和说明补充" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码优化和说明补充" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
