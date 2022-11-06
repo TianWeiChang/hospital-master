@@ -4,14 +4,8 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/dto/DrugInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/dto/DrugInfoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" afterDir="false" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="药品字典相关功能已完结">
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DrugInfoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/doctor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/drugdictionary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view/center/type.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view/center/type.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -541,7 +535,7 @@
       <workItem from="1667432570278" duration="19987000" />
       <workItem from="1667530055038" duration="20970000" />
       <workItem from="1667606451865" duration="9097000" />
-      <workItem from="1667691757922" duration="3726000" />
+      <workItem from="1667691757922" duration="3844000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -676,7 +670,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667634515868</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="药品字典相关功能已完结">
+      <created>1667707695231</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1667707695231</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -714,7 +715,8 @@
     <MESSAGE value="代码格式优化" />
     <MESSAGE value="文档说明补充" />
     <MESSAGE value="代码优化和说明补充" />
-    <option name="LAST_COMMIT_MESSAGE" value="代码优化和说明补充" />
+    <MESSAGE value="药品字典相关功能已完结" />
+    <option name="LAST_COMMIT_MESSAGE" value="药品字典相关功能已完结" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
