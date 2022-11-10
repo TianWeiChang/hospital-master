@@ -37,7 +37,7 @@ public class StorageInOrderInfoDto {
     /**
      * 批次号
      */
-    private Integer batch;
+    private String batch;
     /**
      * 入库数量
      */
@@ -127,11 +127,11 @@ public class StorageInOrderInfoDto {
         this.sellingPrice = sellingPrice;
     }
 
-    public Integer getBatch() {
+    public String getBatch() {
         return batch;
     }
 
-    public void setBatch(Integer batch) {
+    public void setBatch(String batch) {
         this.batch = batch;
     }
 

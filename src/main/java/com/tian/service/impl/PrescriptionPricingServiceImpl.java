@@ -8,7 +8,6 @@ import com.tian.enums.PricingBusinessTypeEnum;
 import com.tian.enums.StatusEnum;
 import com.tian.mapper.PrescriptionPricingMapper;
 import com.tian.mapper.StorageInOrderInfoMapper;
-import com.tian.mq.Message;
 import com.tian.mq.RabbitMqClient;
 import com.tian.mq.message.PrescriptionPricingMsg;
 import com.tian.service.PrescriptionPricingService;
@@ -98,7 +97,7 @@ public class PrescriptionPricingServiceImpl implements PrescriptionPricingServic
         }
         int drugId = prescriptionPricing.getDrugId();
         StorageInOrderInfo storage = new StorageInOrderInfo();
-        storage.setDrugId(drugId);
+//        storage.setDrugId(drugId);
         List<StorageInOrderInfo> storageInOrderInfoList = storageInOrderInfoMapper.selectAll(storage);
         StorageInOrderInfo storageInOrderInfo;
         if (storageInOrderInfoList.size() == 0) {
@@ -143,7 +142,7 @@ public class PrescriptionPricingServiceImpl implements PrescriptionPricingServic
         }
         int drugId = prescriptionPricing.getDrugId();
         StorageInOrderInfo storage = new StorageInOrderInfo();
-        storage.setDrugId(drugId);
+//        storage.setDrugId(drugId);
         List<StorageInOrderInfo> storageInOrderInfoList = storageInOrderInfoMapper.selectAll(storage);
         StorageInOrderInfo storageInOrderInfo;
         if (storageInOrderInfoList.size() > 0) {

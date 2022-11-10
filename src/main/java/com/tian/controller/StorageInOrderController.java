@@ -87,9 +87,7 @@ public class StorageInOrderController {
     @RequestMapping("/storageSum")
     @ResponseBody
     public int storageSum(StorageInOrderInfoDto storageInOrderInfoDto) {
-        StorageInOrderInfo record = new StorageInOrderInfo();
-        record.setDrugId(storageInOrderInfoDto.getDrugInfoId());
-        return storageInOrderInfoService.storageSum(record);
+        return storageInOrderInfoService.storageSum(storageInOrderInfoDto.getDrugInfoId());
     }
 
     //库房药品查询
@@ -103,9 +101,9 @@ public class StorageInOrderController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public Object list(StorageInOrderInfo storageInOrderInfo, Integer page, Integer limit) {
+    public Object list(String drugName, Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        List<StorageInOrderInfoRespDto> listAll = storageInOrderInfoService.list(storageInOrderInfo);
+        List<StorageInOrderInfoRespDto> listAll = storageInOrderInfoService.list(drugName);
         PageInfo<StorageInOrderInfoRespDto> pageInfo = new PageInfo<>(listAll);
         return ReturnDataUtil.getTableData(pageInfo);
     }

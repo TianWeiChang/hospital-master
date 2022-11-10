@@ -13,9 +13,9 @@ import java.util.List;
  * @date 2022年10月22日 16:40
  */
 public interface StorageInOrderInfoService {
-    List<StorageInOrderInfoRespDto> list(StorageInOrderInfo storageInOrderInfo);
+    List<StorageInOrderInfoRespDto> list(String drugName);
 
     Integer add(StorageInOrderInfoDto storageInOrderInfoDto, User user);
 
-    int storageSum(StorageInOrderInfo record);
+    int storageSum(Integer drugInfoId);
 }

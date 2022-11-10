@@ -254,8 +254,13 @@
                     var tradePrice = $("#tradePrice").val();
                     var dgsename = $("#drugstoreName").val();
                     var shengri  = $("#produceDate").val();
-                    var youri = $("#validDate").val();
-
+                    var validDate = $("#validDate").val();
+                    console.log(validDate);
+                    if (validDate == "") {
+                        layer.msg("输入正确的有效日期");
+                        return false;
+                    }
+                    var validDate1 = new Date(validDate);//获取时间 Date 对象用于处理日期和时间
                     var shuliang = $("#drugstorenum").val();
                     var jilunamez = $("#drugstoreName").val();
                     var jilupihao = $("#batch").val();
@@ -265,9 +270,6 @@
                         return false;
                     } else if (produceDate == "") {
                         layer.msg("输入正确的生产日期");
-                        return false;
-                    } else if (youri == "") {
-                        layer.msg("输入正确的有效日期");
                         return false;
                     } else if (dateAT > dateBT || dateAT == dateBT) {
                         layer.msg("日期格式不符");
@@ -283,7 +285,8 @@
                         layer.msg("生产日期不能大于或等于今天");
                         return false;
 
-                    } else if (youri < d || youri == d) {
+                    } else if (date.getTime() >= validDate1.getTime() ) {
+                        console.log(date);console.log(validDate1)
                         layer.msg("有效日期不能小于或等于今天");
                         return false;
 
@@ -393,7 +396,7 @@
 
                             $.ajax({
                                 url: '../storageSum',
-                                data: {"drugInfoId": drugInfoId, "batch": batch},
+                                data: {"drugInfoId": drugInfoId},
                                 dataType: 'JSON',
                                 type: 'post',
                                 success: function (data) {

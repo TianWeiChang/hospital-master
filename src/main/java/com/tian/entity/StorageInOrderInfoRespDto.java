@@ -1,12 +1,14 @@
 package com.tian.entity;
 
+import com.tian.utils.DateUtil;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class StorageInOrderInfoRespDto implements Serializable {
     private Integer id;
 
-    private String batch;
+    private String batchNo;
 
     private String warehouseName;
 
@@ -56,12 +58,12 @@ public class StorageInOrderInfoRespDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getBatch() {
-        return batch;
+    public String getBatchNo() {
+        return batchNo;
     }
 
-    public void setBatch(String batch) {
-        this.batch = batch;
+    public void setBatchNo(String batchNo) {
+        this.batchNo = batchNo;
     }
 
     public String getProductAddress() {
@@ -225,7 +227,7 @@ public class StorageInOrderInfoRespDto implements Serializable {
     }
 
     public String getProductDateStr() {
-        return productDateStr;
+        return DateUtil.format(productDate,DateUtil.DATEFORMATDAY);
     }
 
     public void setProductDateStr(String productDateStr) {
@@ -233,7 +235,7 @@ public class StorageInOrderInfoRespDto implements Serializable {
     }
 
     public String getValidDateStr() {
-        return validDateStr;
+        return DateUtil.format(validDate,DateUtil.DATEFORMATDAY);
     }
 
     public void setValidDateStr(String validDateStr) {
