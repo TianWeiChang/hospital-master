@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.DoctorDutyMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.entity.DoctorDuty" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="doctor_id" property="doctorId" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="register_type_id" property="registerTypeId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from doctor_duty
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tian.entity.DoctorDuty" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into doctor_duty (doctor_id, department_id, register_type_id, 
+      start_time, end_time)
+    values (#{doctorId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{registerTypeId,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.DoctorDuty" >
+    update doctor_duty
+    set doctor_id = #{doctorId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      register_type_id = #{registerTypeId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, doctor_id, department_id, register_type_id, start_time, end_time
+    from doctor_duty
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, doctor_id, department_id, register_type_id, start_time, end_time
+    from doctor_duty
+  </select>
+</mapper>

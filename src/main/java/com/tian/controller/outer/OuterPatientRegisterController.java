@@ -3,10 +3,7 @@ package com.tian.controller.outer;
 import com.tian.dto.CommonResult;
 import com.tian.dto.OuterPatientRegisterReq;
 import com.tian.service.OuterPatientRegisterService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -24,9 +21,41 @@ public class OuterPatientRegisterController {
     @Resource
     private OuterPatientRegisterService outerPatientRegisterService;
 
+    /**
+     * 挂号
+     */
     @PostMapping("/register")
     public CommonResult register(@RequestBody OuterPatientRegisterReq outerPatientRegisterReq) {
         // TODO: 2022/10/28 参数校验
         return outerPatientRegisterService.register(outerPatientRegisterReq);
     }
+
+    /**
+     * 科室列表
+     */
+    @PostMapping("/department/list")
+    public CommonResult departmentList(@RequestBody OuterPatientRegisterReq outerPatientRegisterReq) {
+        // TODO: 2022/10/28 参数校验
+        return outerPatientRegisterService.register(outerPatientRegisterReq);
+    }
+
+
+    /**
+     * 挂号类型
+     */
+    @GetMapping("/register/type")
+    public CommonResult registerType(@RequestBody OuterPatientRegisterReq outerPatientRegisterReq) {
+        // TODO: 2022/10/28 参数校验
+        return outerPatientRegisterService.register(outerPatientRegisterReq);
+    }
+
+    /**
+     * 科室下 某个挂号类型下  所有医生
+     */
+    @GetMapping("/doctor/list")
+    public CommonResult doctorList(@RequestBody OuterPatientRegisterReq outerPatientRegisterReq) {
+        // TODO: 2022/10/28 参数校验
+        return outerPatientRegisterService.register(outerPatientRegisterReq);
+    }
+
 }

@@ -58,6 +58,8 @@ public class ShiroConfig {
         filtermap.put("/sel/login", "anon");
         filtermap.put("index.html", "anon");
         filtermap.put("/out/**", "anon");
+        filtermap.put("/out/wxPay/pay", "anon");
+        filtermap.put("/out/wxPay/callback", "anon");
 
         filtermap.put("/css/**", "anon");
         filtermap.put("/layui/**", "anon");
