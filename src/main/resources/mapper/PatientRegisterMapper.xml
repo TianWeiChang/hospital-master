@@ -12,6 +12,7 @@
         <result column="register_type_id" property="registerTypeId" jdbcType="INTEGER"/>
         <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="pay_status" property="payStatus" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -24,11 +25,13 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into patient_register (patient_id,patient_name,pathogeny,inspect_instructions, doctor_id, department_id,
-        register_type_id, operation_user_id, `status`,
+        register_type_id, operation_user_id, `status`,pay_status,
         create_time, update_time)
-        values (#{patientId,jdbcType=INTEGER},#{patientName,jdbcType=VARCHAR},#{pathogeny,jdbcType=VARCHAR}, #{inspectInstructions,jdbcType=VARCHAR},  #{doctorId,jdbcType=INTEGER},
+        values (#{patientId,jdbcType=INTEGER},#{patientName,jdbcType=VARCHAR},#{pathogeny,jdbcType=VARCHAR},
+        #{inspectInstructions,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER},
         #{departmentId,jdbcType=INTEGER},
         #{registerTypeId,jdbcType=INTEGER}, #{operationUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+        #{payStatus,jdbcType=INTEGER},
         #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.tian.entity.PatientRegister">
@@ -42,6 +45,7 @@
         register_type_id = #{registerTypeId,jdbcType=INTEGER},
         operation_user_id = #{operationUserId,jdbcType=INTEGER},
         `status` = #{status,jdbcType=INTEGER},
+        pay_status = #{payStatus,jdbcType=INTEGER},
         create_time = #{createTime,jdbcType=TIMESTAMP},
         update_time = #{updateTime,jdbcType=TIMESTAMP}
         <if test="pathogeny!=null">
@@ -51,13 +55,14 @@
     </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select id, patient_id,patient_name, pathogeny,inspect_instructions, doctor_id, department_id, register_type_id, operation_user_id,
-    `status`, create_time, update_time
+    `status`, pay_status, create_time, update_time
     from patient_register
     where id = #{id,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
-        select id, patient_id, patient_name,pathogeny,inspect_instructions, doctor_id, department_id, register_type_id, operation_user_id,
-        `status`, create_time, update_time
+        select id, patient_id, patient_name,pathogeny,inspect_instructions, doctor_id, department_id, register_type_id,
+        operation_user_id,
+        `status`,pay_status, create_time, update_time
         from patient_register
         where `status` = 0
         <if test="patientName!=null">
@@ -67,7 +72,26 @@
             AND DATE_FORMAT(create_time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
         </if>
         <if test="date ==3">
-            AND DATE_FORMAT(create_time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+            AND DATE_FORMAT(create_time,'%Y-%m-%d') <![CDATA[ > ]]> DATE_FORMAT(now(),"%Y-%m-%d")
         </if>
+        <if test="payStatus!=null">
+            AND pay_status = #{payStatus,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectList4OrderQueryCount" resultType="int" parameterType="map">
+        select count(1)
+        from patient_register
+        where `status` = 0
+        AND pay_status = 1
+        AND update_time <![CDATA[ <= ]]> #{updateTime}
+    </select>
+    <select id="selectList4OrderQuery" resultMap="BaseResultMap" parameterType="map">
+        select id, patient_id, patient_name,pathogeny,inspect_instructions, doctor_id, department_id, register_type_id, operation_user_id,
+        `status`,pay_status,  create_time, update_time
+        from patient_register
+        where `status` = 0
+        AND pay_status = 1
+        AND update_time <![CDATA[ <= ]]> #{updateTime}
+        limit #{startIndex},#{pageSize}
     </select>
 </mapper>

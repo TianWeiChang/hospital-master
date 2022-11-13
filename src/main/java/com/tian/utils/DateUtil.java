@@ -324,8 +324,7 @@ public class DateUtil {
      */
     public static String getTodayToSecond() {
         Calendar ca = Calendar.getInstance();
-        String str = format(ca.getTime(), DATEFORMATSECOND);
-        return str;
+        return format(ca.getTime(), DATEFORMATSECOND);
     }
 
     /**
@@ -334,8 +333,7 @@ public class DateUtil {
     public static String getLastMonthTodayToSecond() {
         Calendar ca = Calendar.getInstance();
         ca.set(Calendar.MONTH, ca.get(Calendar.MONTH) - 1);
-        String str = format(ca.getTime(), DATEFORMATSECOND);
-        return str;
+        return format(ca.getTime(), DATEFORMATSECOND);
     }
 
     /**
@@ -344,8 +342,7 @@ public class DateUtil {
     public static String getLastWeekTodayToSecond() {
         Calendar ca = Calendar.getInstance();
         ca.add(Calendar.DAY_OF_MONTH, -7);
-        String str = format(ca.getTime(), DATEFORMATSECOND);
-        return str;
+        return format(ca.getTime(), DATEFORMATSECOND);
     }
 
     /**
@@ -533,7 +530,32 @@ public class DateUtil {
         return format(calendar.getTime(), DATEFORMATMINUTE);
     }
 
+    /**
+     * 判断是否是周末
+     *
+     * @return
+     */
+    public static boolean isWeekend() {
+        Calendar calendar = Calendar.getInstance();
+        int week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        if (week == 6 || week == 0) {//0代表周日，6代表周六
+            return true;
+        }
+        return false;
+    }
+
+    public static Date addMinute(int minutes) {
+        Calendar nowTime = Calendar.getInstance();
+        nowTime.add(Calendar.MINUTE, minutes);
+        return nowTime.getTime();
+    }
+
+    public static Date addHour(int hours) {
+        Calendar nowTime = Calendar.getInstance();
+        nowTime.add(Calendar.HOUR, hours);
+        return nowTime.getTime();
+    }
+
     public static void main(String[] args) {
-        System.out.println("1"+"-2");
     }
 }

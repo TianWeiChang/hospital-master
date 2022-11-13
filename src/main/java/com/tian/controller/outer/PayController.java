@@ -12,6 +12,9 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.tian.config.MyDefaultAlipayClient;
+import com.tian.dto.CommonResult;
+import com.tian.enums.ResultCode;
+import com.tian.service.OuterPatientRegisterService;
 import com.tian.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,6 +32,8 @@ import java.util.Map;
  * @author tianwc  公众号：java后端技术全栈、面试专栏
  * @version 1.0.0
  * @date 2022年11月12日 07:43
+ * 支付宝API https://opendocs.alipay.com/open/194/103296?ref=api
+ * <p>
  * 支付宝支付
  */
 @Slf4j
@@ -36,10 +41,9 @@ import java.util.Map;
 @RequestMapping("/out/pay")
 public class PayController {
 
+
     @Resource
-    private AlipayClient alipayClient;
-    @Resource
-    private MyDefaultAlipayClient myDefaultAlipayClient;
+    private OuterPatientRegisterService outerPatientRegisterService;
 
     /**
      * 根据挂号单id发起支付
@@ -52,33 +56,14 @@ public class PayController {
      * 创建支付宝 支付二维码
      */
     @GetMapping("/pre/create")
-    public void wxPay(Double money, String body, Integer uid, HttpServletResponse response) throws Exception {
-        // TODO: 2022/11/12 待替换
-        String tradeNo = String.valueOf(System.currentTimeMillis());
-        log.info("订单号：{}", tradeNo);
-
-        AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
-        JSONObject params = new JSONObject();
-        params.put("out_trade_no", tradeNo);
-        params.put("total_amount", "0.01");
-        params.put("subject", "备注");
-        params.put("body", "详情");
-        params.put("store_id", "NJ_2031");
-        request.setBizContent(params.toString());
-        request.setNotifyUrl(myDefaultAlipayClient.getNotifyUrl());
-
-        AlipayTradePrecreateResponse responseData = null;
-        try {
-            responseData = alipayClient.execute(request);
-        } catch (AlipayApiException e) {
-            log.error("获取支付宝支付二维码失败", e);
+    public void preCreateOrder(Integer id, HttpServletResponse response) throws Exception {
+        CommonResult<String> result = outerPatientRegisterService.preCreateOrder(id);
+        if (ResultCode.SUCCESS.getCode() != result.getCode()) {
+            log.error(result.getMessage());
+            // TODO: 2022/11/13 跳转到统一的一个错误页面去
+            return;
         }
-        if (responseData == null) {
-            log.error("获取支付宝支付二维码失败, 返回参数为空");
-            throw new Exception("获取支付宝支付二维码失败, 返回参数为空");
-        }
-        log.info("response:{}", responseData.getBody());
-        String qrCode = responseData.getQrCode();
+        String qrCode = result.getData();
         try {
             // 生成二维码配置
             Map<EncodeHintType, Object> hints = new HashMap<>();
@@ -103,8 +88,10 @@ public class PayController {
     @RequestMapping("/callback")
     public void callback(HttpServletRequest request) {
         String tradeStatus = request.getParameter("trade_status");
+        //trade_status_sync
+        String notifyType = request.getParameter("notify_type");
         String tradeNo = request.getParameter("out_trade_no");
-
+        // TODO: 2022/11/13 真实环境这里需要验签哈 根据 sign_type和sign
         if (StringUtil.isEmpty(tradeStatus) || StringUtil.isEmpty(tradeNo)) {
             log.error("支付宝回调 参数为空");
         }
@@ -112,6 +99,7 @@ public class PayController {
         if ("TRADE_SUCCESS".equals(tradeStatus)) {
             // TODO 支付成功 修改订单状态
             //notify success trade_status=TRADE_SUCCESS out_trade_no=1668263409801
+            outerPatientRegisterService.payNotify(tradeNo, tradeStatus);
             log.info("notify success trade_status={} out_trade_no={}", tradeStatus, tradeNo);
         } else {
             log.error("notify failed trade_status={} out_trade_no={}", tradeStatus, tradeNo);

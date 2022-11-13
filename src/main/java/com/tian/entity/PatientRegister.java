@@ -23,6 +23,7 @@ public class PatientRegister implements Serializable {
     private Integer operationUserId;
 
     private Integer status;
+    private Integer payStatus;
 
     private Date createTime;
 
@@ -120,6 +121,14 @@ public class PatientRegister implements Serializable {
         this.status = status;
     }
 
+    public Integer getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(Integer payStatus) {
+        this.payStatus = payStatus;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -138,21 +147,21 @@ public class PatientRegister implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", patientId=").append(patientId);
-        sb.append(", doctorId=").append(doctorId);
-        sb.append(", departmentId=").append(departmentId);
-        sb.append(", registerTypeId=").append(registerTypeId);
-        sb.append(", operationUserId=").append(operationUserId);
-        sb.append(", status=").append(status);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "PatientRegister{" +
+                "id=" + id +
+                ", patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", pathogeny='" + pathogeny + '\'' +
+                ", inspectInstructions='" + inspectInstructions + '\'' +
+                ", doctorId=" + doctorId +
+                ", departmentId=" + departmentId +
+                ", registerTypeId=" + registerTypeId +
+                ", operationUserId=" + operationUserId +
+                ", status=" + status +
+                ", payStatus=" + payStatus +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", date=" + date +
+                '}';
     }
 }

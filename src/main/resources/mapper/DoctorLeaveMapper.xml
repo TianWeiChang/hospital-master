@@ -1,41 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tian.mapper.DoctorLeaveMapper" >
-  <resultMap id="BaseResultMap" type="com.tian.entity.DoctorLeave" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="doctor_id" property="doctorId" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+<mapper namespace="com.tian.mapper.DoctorLeaveMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.DoctorLeave">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="doctor_id" property="doctorId" jdbcType="INTEGER"/>
+        <result column="department_id" property="departmentId" jdbcType="INTEGER"/>
+        <result column="register_type_id" property="registerTypeId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from doctor_leave
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.tian.entity.DoctorLeave" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into doctor_leave (doctor_id, `status`, start_time, 
-      end_time)
-    values (#{doctorId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.tian.entity.DoctorLeave" >
+    <insert id="insert" parameterType="com.tian.entity.DoctorLeave">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into doctor_leave (doctor_id,department_id, register_type_id, `status`, start_time,
+        end_time)
+        values (#{doctorId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{registerTypeId,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.DoctorLeave">
     update doctor_leave
     set doctor_id = #{doctorId,jdbcType=INTEGER},
+    department_id=#{departmentId,jdbcType=INTEGER},
+    register_type_id=#{registerTypeId,jdbcType=INTEGER},
       `status` = #{status,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select id, doctor_id, `status`, start_time, end_time
     from doctor_leave
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, doctor_id, `status`, start_time, end_time
-    from doctor_leave
-  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, doctor_id, `status`, start_time, end_time
+        from doctor_leave
+        where `status` = 0
+        <if test="departmentId!=null">
+            and department_id=#{departmentId,jdbcType=INTEGER}
+        </if>
+        <if test="departmentId!=null">
+            and register_type_id=#{registerTypeId,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectByIdList" resultMap="BaseResultMap" parameterType="list">
+        select id, doctor_id, `status`, start_time, end_time
+        from doctor_leave
+        where doctor_id in
+        <foreach collection="idList" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

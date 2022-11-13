@@ -7,6 +7,8 @@ public class DoctorLeave implements Serializable {
     private Integer id;
 
     private Integer doctorId;
+    private Integer departmentId;
+    private Integer registerTypeId;
 
     private Integer status;
 
@@ -56,19 +58,32 @@ public class DoctorLeave implements Serializable {
         this.endTime = endTime;
     }
 
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public Integer getRegisterTypeId() {
+        return registerTypeId;
+    }
+
+    public void setRegisterTypeId(Integer registerTypeId) {
+        this.registerTypeId = registerTypeId;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", doctorId=").append(doctorId);
-        sb.append(", status=").append(status);
-        sb.append(", startTime=").append(startTime);
-        sb.append(", endTime=").append(endTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "DoctorLeave{" +
+                "id=" + id +
+                ", doctorId=" + doctorId +
+                ", departmentId=" + departmentId +
+                ", registerTypeId=" + registerTypeId +
+                ", status=" + status +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                '}';
     }
 }
