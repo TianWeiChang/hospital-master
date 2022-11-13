@@ -4,24 +4,9 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="在线支付（支付单查询）、外网挂号完善">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/enums/PayStatusEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/job/PayOrderQueryTask.java" afterDir="false" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/PayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/PayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/entity/DoctorLeave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/DoctorLeave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/entity/PatientRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/PatientRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DoctorDutyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DoctorDutyMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DoctorLeaveMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DoctorLeaveMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/mapper/PatientRegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/PatientRegisterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/OuterPatientRegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/OuterPatientRegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/utils/DateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/utils/DateUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DoctorDutyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DoctorDutyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DoctorLeaveMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DoctorLeaveMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PatientRegisterMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PatientRegisterMapper.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -596,7 +581,7 @@
       <workItem from="1668069115963" duration="10296000" />
       <workItem from="1668127362836" duration="7934000" />
       <workItem from="1668208661053" duration="19387000" />
-      <workItem from="1668302039163" duration="17896000" />
+      <workItem from="1668302039163" duration="18552000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -766,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668263703385</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="在线支付（支付单查询）、外网挂号完善">
+      <created>1668337103908</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1668337103908</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
