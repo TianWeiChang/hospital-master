@@ -4,6 +4,7 @@ import com.tian.dto.CommonResult;
 import com.tian.dto.OuterPatientRegisterReq;
 import com.tian.service.OuterPatientRegisterService;
 import com.tian.utils.DateUtil;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -71,8 +72,8 @@ public class OuterPatientRegisterController {
      * @return 返回已经预约情况
      */
     @GetMapping("/doctor/time/slot")
-    public CommonResult doctorTimeSlotList(Integer doctorId, String registerDate, Integer timeSlot) throws ParseException {
+    public CommonResult doctorTimeSlotList(Integer doctorId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date registerDate, Integer timeSlot) throws ParseException {
         // TODO: 2022/10/28 参数校验
-        return outerPatientRegisterService.doctorTimeSlotList(doctorId, DateUtil.parase(registerDate, DateUtil.DATEFORMATDAY), timeSlot);
+        return outerPatientRegisterService.doctorTimeSlotList(doctorId, registerDate, timeSlot);
     }
 }

@@ -4,8 +4,11 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" afterDir="false" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2022-11-14T041136.200.json" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/2022-11-14T041136.200.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +45,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response9.json" root0="SKIP_INSPECTION" />
+    <setting file="dummy://restClient/response11.json" root0="SKIP_INSPECTION" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -634,7 +637,7 @@
       <workItem from="1668127362836" duration="7934000" />
       <workItem from="1668208661053" duration="19387000" />
       <workItem from="1668302039163" duration="19783000" />
-      <workItem from="1668382580492" duration="9407000" />
+      <workItem from="1668382580492" duration="10888000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -825,7 +828,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668410402528</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制">
+      <created>1668410461819</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1668410461819</updated>
+    </task>
+    <task id="LOCAL-00029" summary="表结构脚本">
+      <created>1668411486315</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668411486315</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -868,7 +885,8 @@
     <MESSAGE value="集成支付宝支付（支付二维码生成、付款后回调通知）、医生请假表结构设计、医生值班安排表结构设计" />
     <MESSAGE value="在线支付（支付单查询）、外网挂号完善" />
     <MESSAGE value="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制" />
-    <option name="LAST_COMMIT_MESSAGE" value="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制" />
+    <MESSAGE value="表结构脚本" />
+    <option name="LAST_COMMIT_MESSAGE" value="表结构脚本" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -892,16 +910,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/tian/controller/StorageInOrderController.java</url>
           <line>104</line>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/templates/cao/Ctoll.html</url>
