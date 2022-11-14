@@ -4,20 +4,8 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/DoctorRegisterTimeSlot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/RegisterTimeSlot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/RegisterTimeVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DoctorRegisterTimeSlotMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/RegisterTimeSlotMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/DoctorRegisterTimeSlotMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/RegisterTimeSlotMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/dto/OuterPatientRegisterReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/dto/OuterPatientRegisterReq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/OuterPatientRegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/OuterPatientRegisterService.java" afterDir="false" />
+    <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -646,7 +634,7 @@
       <workItem from="1668127362836" duration="7934000" />
       <workItem from="1668208661053" duration="19387000" />
       <workItem from="1668302039163" duration="19783000" />
-      <workItem from="1668382580492" duration="9284000" />
+      <workItem from="1668382580492" duration="9407000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -830,7 +818,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668340654492</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制">
+      <created>1668410402528</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1668410402528</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -872,7 +867,8 @@
     <MESSAGE value="入库单新增和查询、库存查询" />
     <MESSAGE value="集成支付宝支付（支付二维码生成、付款后回调通知）、医生请假表结构设计、医生值班安排表结构设计" />
     <MESSAGE value="在线支付（支付单查询）、外网挂号完善" />
-    <option name="LAST_COMMIT_MESSAGE" value="在线支付（支付单查询）、外网挂号完善" />
+    <MESSAGE value="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制" />
+    <option name="LAST_COMMIT_MESSAGE" value="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -180,7 +180,7 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
         doctorRegisterTimeSlot.setRegisterTimeSlotId(registerTimeSlotId);
         List<DoctorRegisterTimeSlot> doctorRegisterTimeSlotList = doctorRegisterTimeSlotMapper.selectAll(doctorRegisterTimeSlot);
         if (CollectionUtils.isEmpty(doctorRegisterTimeSlotList)) {
-            // TODO: 2022/11/14 这里还有一种处理方式，就是定时任务每周之星一次，把医生、日期、时间段 插入数据库表中
+            // TODO: 2022/11/14 这里可以采用另外一种方案，就是定时任务每周之星一次，把医生、日期、时间段 插入数据库表中
             //证明还没有约过
             doctorRegisterTimeSlot.setRegisterTotal(0);
             doctorRegisterTimeSlotMapper.insert(doctorRegisterTimeSlot);
