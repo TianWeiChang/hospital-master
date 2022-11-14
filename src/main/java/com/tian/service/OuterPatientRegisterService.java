@@ -4,6 +4,8 @@ import com.alipay.api.AlipayApiException;
 import com.tian.dto.CommonResult;
 import com.tian.dto.OuterPatientRegisterReq;
 
+import java.util.Date;
+
 /**
  * @author tianwc 公众号：java后端技术全栈、面试专栏
  * @version 1.0.0
@@ -34,6 +36,11 @@ public interface OuterPatientRegisterService {
      * 挂号类型列表
      */
     CommonResult registerTypeList(OuterPatientRegisterReq outerPatientRegisterReq);
+
+    /**
+     * 挂号类型列表
+     */
+    CommonResult doctorTimeSlotList(Integer doctorId, Date registerDate, Integer timeSlot);
 
     /**
      * 创建预支付单

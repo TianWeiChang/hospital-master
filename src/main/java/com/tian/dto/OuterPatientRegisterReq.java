@@ -15,6 +15,7 @@ public class OuterPatientRegisterReq   {
     private Integer departmentId;
     private Integer registerTypeId;
     private Integer doctorId;
+    private Integer doctorRegisterTimeSlotId;
 
     public String getToken() {
         return token;
@@ -78,5 +79,13 @@ public class OuterPatientRegisterReq   {
 
     public void setDoctorId(Integer doctorId) {
         this.doctorId = doctorId;
+    }
+
+    public Integer getDoctorRegisterTimeSlotId() {
+        return doctorRegisterTimeSlotId;
+    }
+
+    public void setDoctorRegisterTimeSlotId(Integer doctorRegisterTimeSlotId) {
+        this.doctorRegisterTimeSlotId = doctorRegisterTimeSlotId;
     }
 }

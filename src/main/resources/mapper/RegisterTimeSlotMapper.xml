@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.RegisterTimeSlotMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.RegisterTimeSlot">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="time_slot" property="timeSlot" jdbcType="INTEGER"/>
+        <result column="max" property="max" jdbcType="INTEGER"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from register_time_slot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.tian.entity.RegisterTimeSlot">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into register_time_slot (time_slot, `max`)
+        values (#{timeSlot,jdbcType=INTEGER}, #{max,jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.RegisterTimeSlot">
+    update register_time_slot
+    set time_slot = #{timeSlot,jdbcType=INTEGER},
+      `max` = #{max,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, time_slot, `max`
+    from register_time_slot
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, time_slot, `max`
+        from register_time_slot
+        where 1=1
+        <if test="timeSlot!=null">
+            AND time_slot = #{timeSlot,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

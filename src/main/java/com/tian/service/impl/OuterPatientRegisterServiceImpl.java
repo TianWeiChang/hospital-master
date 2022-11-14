@@ -21,6 +21,7 @@ import com.tian.service.PatientRegisterService;
 import com.tian.utils.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -58,9 +59,14 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
     private MyDefaultAlipayClient myDefaultAlipayClient;
     @Resource
     private PatientRegisterMapper patientRegisterMapper;
+    @Resource
+    private DoctorRegisterTimeSlotMapper doctorRegisterTimeSlotMapper;
+    @Resource
+    private RegisterTimeSlotMapper registerTimeSlotMapper;
 
     private static final String REGISTER_PAY_ORDER_PRE = "REGISTER_PAY_ORDER_";
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public CommonResult register(OuterPatientRegisterReq outerPatientRegisterReq) {
         OuterPatientRegister outerPatientRegister = JSON.parseObject(redisConfig.get(outerPatientRegisterReq.getToken()), OuterPatientRegister.class);
@@ -75,6 +81,9 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
         patientRegister.setGender(outerPatientRegisterReq.getGender());
         int flag = patientRegisterService.add(patientRegister);
         if (flag == 1) {
+            DoctorRegisterTimeSlot doctorRegisterTimeSlot = doctorRegisterTimeSlotMapper.selectByPrimaryKey(outerPatientRegisterReq.getDoctorRegisterTimeSlotId());
+            doctorRegisterTimeSlot.setRegisterTotal(doctorRegisterTimeSlot.getRegisterTotal() + 1);
+            doctorRegisterTimeSlotMapper.updateByPrimaryKey(doctorRegisterTimeSlot);
             return CommonResult.success("挂号成功");
         }
         return CommonResult.failed("挂号失败");
@@ -148,6 +157,48 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
             return CommonResult.failed("挂号类型数据不存在");
         }
         return CommonResult.success(registerTypeInfoList);
+    }
+
+    /**
+     * 前端处理：
+     * 如果已约人数和最多人数一样了，显示已约满
+     * 如果已约人数小于最多人数，则用最多人数 - 已约人数 = 剩余可约
+     */
+    @Override
+    public CommonResult doctorTimeSlotList(Integer doctorId, Date registerDate, Integer timeSlot) {
+        RegisterTimeSlot registerTimeSlot = new RegisterTimeSlot();
+        registerTimeSlot.setTimeSlot(timeSlot);
+        List<RegisterTimeSlot> registerTimeSlotList = registerTimeSlotMapper.selectAll(registerTimeSlot);
+        if (CollectionUtils.isEmpty(registerTimeSlotList)) {
+            return CommonResult.failed("timeSlot 参数有误");
+        }
+        Integer registerTimeSlotId = registerTimeSlotList.get(0).getId();
+
+        DoctorRegisterTimeSlot doctorRegisterTimeSlot = new DoctorRegisterTimeSlot();
+        doctorRegisterTimeSlot.setDoctorId(doctorId);
+        doctorRegisterTimeSlot.setRegisterDate(registerDate);
+        doctorRegisterTimeSlot.setRegisterTimeSlotId(registerTimeSlotId);
+        List<DoctorRegisterTimeSlot> doctorRegisterTimeSlotList = doctorRegisterTimeSlotMapper.selectAll(doctorRegisterTimeSlot);
+        if (CollectionUtils.isEmpty(doctorRegisterTimeSlotList)) {
+            // TODO: 2022/11/14 这里还有一种处理方式，就是定时任务每周之星一次，把医生、日期、时间段 插入数据库表中
+            //证明还没有约过
+            doctorRegisterTimeSlot.setRegisterTotal(0);
+            doctorRegisterTimeSlotMapper.insert(doctorRegisterTimeSlot);
+            RegisterTimeVO registerTimeVO = new RegisterTimeVO();
+            registerTimeVO.setRegisterDate(DateUtil.format(doctorRegisterTimeSlot.getRegisterDate(), DateUtil.DATEFORMATDAY));
+            registerTimeVO.setRegisterTotal(doctorRegisterTimeSlot.getRegisterTotal());
+            registerTimeVO.setMax(registerTimeSlotList.get(0).getMax());
+            registerTimeVO.setDoctorRegisterTimeSlotId(doctorRegisterTimeSlot.getId());
+            return CommonResult.success(registerTimeVO);
+        }
+        DoctorRegisterTimeSlot doctorRegisterTimeSlot1 = doctorRegisterTimeSlotList.get(0);
+
+        RegisterTimeVO registerTimeVO = new RegisterTimeVO();
+        registerTimeVO.setRegisterDate(DateUtil.format(doctorRegisterTimeSlot1.getRegisterDate(), DateUtil.DATEFORMATDAY));
+        registerTimeVO.setRegisterTotal(doctorRegisterTimeSlot1.getRegisterTotal());
+        registerTimeVO.setMax(registerTimeSlotList.get(0).getMax());
+        registerTimeVO.setDoctorRegisterTimeSlotId(doctorRegisterTimeSlot1.getId());
+        return CommonResult.success(registerTimeVO);
     }
 
     @Override

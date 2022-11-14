@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.DoctorRegisterTimeSlotMapper">
+    <resultMap id="BaseResultMap" type="com.tian.entity.DoctorRegisterTimeSlot">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="doctor_id" property="doctorId" jdbcType="INTEGER"/>
+        <result column="register_time_slot_id" property="registerTimeSlotId" jdbcType="INTEGER"/>
+        <result column="register_total" property="registerTotal" jdbcType="INTEGER"/>
+        <result column="register_date" property="registerDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from doctor_register_time_slot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.tian.entity.DoctorRegisterTimeSlot">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into doctor_register_time_slot (doctor_id, register_time_slot_id, register_total,
+        register_date)
+        values (#{doctorId,jdbcType=INTEGER}, #{registerTimeSlotId,jdbcType=INTEGER}, #{registerTotal,jdbcType=INTEGER},
+        #{registerDate,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.tian.entity.DoctorRegisterTimeSlot">
+    update doctor_register_time_slot
+    set doctor_id = #{doctorId,jdbcType=INTEGER},
+      register_time_slot_id = #{registerTimeSlotId,jdbcType=INTEGER},
+      register_total = #{registerTotal,jdbcType=INTEGER},
+      register_date = #{registerDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, doctor_id, register_time_slot_id, register_total, register_date
+    from doctor_register_time_slot
+    where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, doctor_id, register_time_slot_id, register_total, register_date
+        from doctor_register_time_slot
+        where 1=1
+        <if test="doctorId!=null">
+            AND doctor_id = #{doctorId,jdbcType=INTEGER}
+        </if>
+        <if test="registerDate!=null">
+            AND register_date = #{registerDate,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+</mapper>

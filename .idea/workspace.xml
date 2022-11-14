@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/DoctorRegisterTimeSlot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/RegisterTimeSlot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/RegisterTimeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/DoctorRegisterTimeSlotMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/RegisterTimeSlotMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/DoctorRegisterTimeSlotMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/RegisterTimeSlotMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/dto/OuterPatientRegisterReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/dto/OuterPatientRegisterReq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/OuterPatientRegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/OuterPatientRegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +54,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response1.json" root0="SKIP_INSPECTION" />
+    <setting file="dummy://restClient/response9.json" root0="SKIP_INSPECTION" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -73,6 +84,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../F2FPay_Demo_Java/TradePayDemo" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -93,6 +105,58 @@
   <component name="RestClientSettings">
     <option name="REQUEST_HISTORY">
       <list>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="9CB77D293F0FE6135BBB1C56B7CD39E9" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:9001" />
+          <option name="urlPath" value="/out/doctor/time/slot" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="doctorId" />
+                <option name="value" value="1" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="registerDate" />
+                <option name="value" value="2022-11-14" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="timeSlot" />
+                <option name="value" value="1" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;alipay_trade_precreate_response&quot;:{&quot;code&quot;:&quot;10000&quot;,&quot;msg&quot;:&quot;Success&quot;,&quot;out_trade_no&quot;:&quot;REGISTER_PAY_ORDER3&quot;,&quot;qr_code&quot;:&quot;https:\/\/qr.alipay.com\/bax09472yblwjtoicjlr001f&quot;},&quot;sign&quot;:&quot;Flxu4Z6w6vF00WefuEbzhk5sLEWY8akptc5YVGQOrZjXTin2boX3xCQbSA+jwTBZalz3poludKiQICWsNVQxj7wiyqF2n7+2P2a4Fzx09ikN4s/2MWHDJWeN3K9VN+O1RTGQuYsykuvNphZXIQjP/0LeG8mjSk0WZ8YX+ODXbvKmIE+x5h+JPblbubIXRPaAl1tUfl3vJVVW1UxxGDmgyXteK6CG3VfPzNwFK1UdzLSYLc3UCzSTK+pYvkySGvstSPvPEL6QaOK1KZb2u2/tNDMytKan8YBsbG9uwBpCS10+L404Gj0hLFlylPsILYIfGiA3+k6AQx60I+lNZHroIw==&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
         <RestClientRequest>
           <option name="biscuits">
             <list>
@@ -581,7 +645,8 @@
       <workItem from="1668069115963" duration="10296000" />
       <workItem from="1668127362836" duration="7934000" />
       <workItem from="1668208661053" duration="19387000" />
-      <workItem from="1668302039163" duration="18552000" />
+      <workItem from="1668302039163" duration="19783000" />
+      <workItem from="1668382580492" duration="9284000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -758,7 +823,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668337103908</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="在线支付（支付单查询）、外网挂号完善">
+      <created>1668340654492</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1668340654492</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -824,6 +896,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/tian/controller/StorageInOrderController.java</url>
           <line>104</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java</url>
+          <line>169</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tian/controller/outer/OuterPatientRegisterController.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/templates/cao/Ctoll.html</url>
