@@ -19,13 +19,18 @@ import com.tian.service.DepartmentInfoService;
 import com.tian.service.OuterPatientRegisterService;
 import com.tian.service.PatientRegisterService;
 import com.tian.utils.DateUtil;
+import com.tian.utils.RedisPrefixConstant;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -63,6 +68,8 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
     private DoctorRegisterTimeSlotMapper doctorRegisterTimeSlotMapper;
     @Resource
     private RegisterTimeSlotMapper registerTimeSlotMapper;
+    @Resource
+    private RedissonClient redissonClient;
 
     private static final String REGISTER_PAY_ORDER_PRE = "REGISTER_PAY_ORDER_";
 
@@ -81,9 +88,19 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
         patientRegister.setGender(outerPatientRegisterReq.getGender());
         int flag = patientRegisterService.add(patientRegister);
         if (flag == 1) {
-            DoctorRegisterTimeSlot doctorRegisterTimeSlot = doctorRegisterTimeSlotMapper.selectByPrimaryKey(outerPatientRegisterReq.getDoctorRegisterTimeSlotId());
-            doctorRegisterTimeSlot.setRegisterTotal(doctorRegisterTimeSlot.getRegisterTotal() + 1);
-            doctorRegisterTimeSlotMapper.updateByPrimaryKey(doctorRegisterTimeSlot);
+            // 引入分布式锁（后期 改造成分布式项目了 直接使用就行）
+            String key = RedisPrefixConstant.DOCTOR_REGISTER_SLOT_KEY_PREFIX + outerPatientRegisterReq.getDoctorRegisterTimeSlotId();
+            RLock lock = redissonClient.getLock(key);
+            //加锁
+            lock.lock(10, TimeUnit.SECONDS);
+            try {
+                DoctorRegisterTimeSlot doctorRegisterTimeSlot = doctorRegisterTimeSlotMapper.selectByPrimaryKey(outerPatientRegisterReq.getDoctorRegisterTimeSlotId());
+                doctorRegisterTimeSlot.setRegisterTotal(doctorRegisterTimeSlot.getRegisterTotal() + 1);
+                doctorRegisterTimeSlotMapper.updateByPrimaryKey(doctorRegisterTimeSlot);
+            } finally {
+                //释放锁
+                lock.unlock();
+            }
             return CommonResult.success("挂号成功");
         }
         return CommonResult.failed("挂号失败");
@@ -105,7 +122,7 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
 
         //判断当前是不是周末
         boolean weekend = DateUtil.isWeekend();
-        List<DoctorLeave> doctorLeaveList = null;
+        List<DoctorLeave> doctorLeaveList;
         List<Integer> doctorIdList = null;
 
         if (!weekend) {
@@ -134,6 +151,7 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
         //去除 已经请假的
         if (!CollectionUtils.isEmpty(doctorLeaveList)) {
             Map<Integer, DoctorLeave> maps = doctorLeaveList.stream().collect(Collectors.toMap(DoctorLeave::getDoctorId, Function.identity()));
+            //遍历的同时 会删除元素，所以 这里用的是 迭代的方式，如果用for形式会出现 ConcurrentModificationException 异常
             Iterator<Integer> integerIterator = doctorIdList.iterator();
             while (integerIterator.hasNext()) {
                 Integer id = integerIterator.next();
@@ -182,8 +200,16 @@ public class OuterPatientRegisterServiceImpl implements OuterPatientRegisterServ
         if (CollectionUtils.isEmpty(doctorRegisterTimeSlotList)) {
             // TODO: 2022/11/14 这里可以采用另外一种方案，就是定时任务每周之星一次，把医生、日期、时间段 插入数据库表中
             //证明还没有约过
+            //见了一个唯一索引：doctorId+registerTimeSlotId+registerDate
             doctorRegisterTimeSlot.setRegisterTotal(0);
-            doctorRegisterTimeSlotMapper.insert(doctorRegisterTimeSlot);
+            try {
+                doctorRegisterTimeSlotMapper.insert(doctorRegisterTimeSlot);
+            } catch (DuplicateKeyException ex) {
+                //同时插入数据了
+                log.error("数据库已存在");
+                doctorRegisterTimeSlotList = doctorRegisterTimeSlotMapper.selectAll(doctorRegisterTimeSlot);
+                doctorRegisterTimeSlot = doctorRegisterTimeSlotList.get(0);
+            }
             RegisterTimeVO registerTimeVO = new RegisterTimeVO();
             registerTimeVO.setRegisterDate(DateUtil.format(doctorRegisterTimeSlot.getRegisterDate(), DateUtil.DATEFORMATDAY));
             registerTimeVO.setRegisterTotal(doctorRegisterTimeSlot.getRegisterTotal());

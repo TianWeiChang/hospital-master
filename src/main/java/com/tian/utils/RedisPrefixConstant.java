@@ -11,4 +11,5 @@ public class RedisPrefixConstant {
      */
     public static final String SEND_CODE_KEY_PREFIX = "send.code";
     public static final String OUTER_LOGIN_KEY_PREFIX = "outer.login";
+    public static final String DOCTOR_REGISTER_SLOT_KEY_PREFIX = "doctor.register.slot";
 }

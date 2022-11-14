@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80022
 File Encoding         : 65001
 
-Date: 2022-11-14 15:37:20
+Date: 2022-11-14 17:26:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -152,7 +152,8 @@ CREATE TABLE `doctor_register_time_slot` (
   `register_time_slot_id` int NOT NULL COMMENT '挂号预约时间段id',
   `register_total` int NOT NULL COMMENT '已约人数',
   `register_date` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '预约日期',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `doctor_slot_index` (`doctor_id`,`register_time_slot_id`,`register_date`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='医生预约挂号时间段表';
 
 -- ----------------------------
