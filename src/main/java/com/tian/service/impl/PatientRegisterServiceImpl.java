@@ -115,7 +115,7 @@ public class PatientRegisterServiceImpl implements PatientRegisterService {
      * 事务处理
      * 必须两个表都插入成功，或者两个都不成功
      */
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional("aaaaaaa")
     @Override
     public int add(PatientRegisterParamsDTO patientRegisterParamsDTO) {
         PatientInfo patientInfo = new PatientInfo();

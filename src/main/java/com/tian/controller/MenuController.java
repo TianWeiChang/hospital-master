@@ -100,7 +100,7 @@ public class MenuController extends BaseController {
     /*
      * 加载首页左边导航栏
      * */
-    @RequestMapping("toTreeLoad")
+    @RequestMapping("/toTreeLoad")
     @ResponseBody
     public List<TreeNode> toTreeLoad(HttpServletRequest request) {
         //获取用户登陆id根据不同的用户有不停菜单
@@ -140,7 +140,7 @@ public class MenuController extends BaseController {
     /*
      * 加载菜单管理左边的菜单树
      * */
-    @RequestMapping("loadMenuMangerLeftTreeJson")
+    @RequestMapping("/loadMenuMangerLeftTreeJson")
     @ResponseBody
     public DataGridView loadMenuMangerLeftTreeJson(Menu menu) {
         //查询所有菜单那

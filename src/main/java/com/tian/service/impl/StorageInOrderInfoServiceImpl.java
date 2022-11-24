@@ -10,6 +10,8 @@ import com.tian.service.StorageInOrderInfoService;
 import com.tian.utils.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -37,6 +39,7 @@ public class StorageInOrderInfoServiceImpl implements StorageInOrderInfoService 
         return storageInOrderInfoMapper.selectListPage(drugName);
     }
 
+    @Transactional(isolation= Isolation.DEFAULT)
     @Override
     public Integer add(StorageInOrderInfoDto storageInOrderInfoDto, User user) {
         StorageInOrderInfo storageInOrderInfo = new StorageInOrderInfo();

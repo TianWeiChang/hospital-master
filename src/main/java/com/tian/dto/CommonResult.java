@@ -2,6 +2,8 @@ package com.tian.dto;
 
 import com.tian.enums.ResultCode;
 
+import java.io.Serializable;
+
 /**
  * @author tianwc  公众号：java后端技术全栈、面试专栏
  * @version 1.0.0
@@ -9,7 +11,7 @@ import com.tian.enums.ResultCode;
  *
  * 统一返回参数
  */
-public class CommonResult<T> {
+public class CommonResult<T> implements Serializable {
     private int code;
     private String message;
     private T data;

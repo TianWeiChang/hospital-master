@@ -32,8 +32,8 @@ public class PayOrderQueryTask {
     //或直接指定时间间隔，例如：30秒
     //@Scheduled(fixedRate=30000)
     private void configureTasks() {
-        log.info("定时任务 查询支付单状态: start");
+     /*   log.info("定时任务 查询支付单状态: start");
         outerPatientRegisterService.payOrderQuery();
-        log.info("定时任务  查询支付单状态: end");
+        log.info("定时任务  查询支付单状态: end");*/
     }
 }

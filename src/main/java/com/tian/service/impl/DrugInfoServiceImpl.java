@@ -10,6 +10,7 @@ import com.tian.mapper.DrugProductAddressInfoMapper;
 import com.tian.mapper.DrugTypeInfoMapper;
 import com.tian.mapper.UnitInfoMapper;
 import com.tian.mq.RabbitMqClient;
+import com.tian.service.AsyncService;
 import com.tian.service.DrugInfoService;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,8 @@ public class DrugInfoServiceImpl implements DrugInfoService {
     private DrugProductAddressInfoMapper drugProductAddressInfoMapper;
     @Resource
     private RabbitMqClient rabbitMqClient;
+    @Resource
+    private AsyncService asyncService;
 
     @Override
     public PageInfo<DrugInfoDto> list(DrugInfo drugInfo) {
@@ -57,8 +60,8 @@ public class DrugInfoServiceImpl implements DrugInfoService {
             drugInfoOperationLog.setOperationUserId(user.getUserid());
             drugInfoOperationLog.setBeforeContent(null);
             drugInfoOperationLog.setAfterContent(JSON.toJSONString(drugInfo));
-            rabbitMqClient.sendDrugInfoOperationLog(drugInfoOperationLog);
-//            asyncService.executeAsyncDrugInfoOperationLog(new Date(), user.getUserid(), null, JSON.toJSONString(drugInfo));
+//            rabbitMqClient.sendDrugInfoOperationLog(drugInfoOperationLog);
+            asyncService.executeAsyncDrugInfoOperationLog(new Date(), user.getUserid(), null, JSON.toJSONString(drugInfo));
             return "添加成功";
         }
         return "添加失败";

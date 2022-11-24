@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2286f91-8fb8-4b22-b9a8-3ac3d76eda9e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/entity/PatientSystemMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tian/mapper/PatientSystemMessageMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/PatientSystemMessageMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/OuterPatientRegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/utils/RedisPrefixConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/utils/RedisPrefixConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/PayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/controller/outer/PayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/dto/CommonResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/dto/CommonResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/job/PayOrderQueryTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/job/PayOrderQueryTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/DrugInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/PatientRegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/PatientRegisterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/StorageInOrderInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/service/impl/StorageInOrderInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tian/utils/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tian/utils/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DepartmentInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DepartmentInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,9 +56,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response11.json" root0="SKIP_INSPECTION" />
-  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -73,7 +83,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../F2FPay_Demo_Java/TradePayDemo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gp-shop/gupaoedu-vip-mall/pom.xml" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -584,9 +594,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.Application" />
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.DateUtil" />
         <item itemvalue="Application.Reload" />
-        <item itemvalue="Application.Test" />
         <item itemvalue="Application.Solution" />
       </list>
     </recent_temporary>
@@ -636,7 +646,15 @@
       <workItem from="1668127362836" duration="7934000" />
       <workItem from="1668208661053" duration="19387000" />
       <workItem from="1668302039163" duration="19783000" />
-      <workItem from="1668382580492" duration="14873000" />
+      <workItem from="1668382580492" duration="16816000" />
+      <workItem from="1668485251275" duration="1863000" />
+      <workItem from="1668564067433" duration="4647000" />
+      <workItem from="1668640783543" duration="4604000" />
+      <workItem from="1668732486714" duration="8806000" />
+      <workItem from="1668818715219" duration="12374000" />
+      <workItem from="1668902431050" duration="13546000" />
+      <workItem from="1668987935951" duration="10868000" />
+      <workItem from="1669249502375" duration="9050000" />
     </task>
     <task id="LOCAL-00001" summary="数据中心基础表构建完成">
       <created>1666769996410</created>
@@ -848,7 +866,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668413533430</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="分布式锁来控制 医生在某田某个时间段 预约人数的控制。添加了联合索引防止并发入库">
+      <created>1668418080009</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1668418080009</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -893,7 +918,8 @@
     <MESSAGE value="外网预约挂号 --增加时间段功能，上午或下午、预约人数限制" />
     <MESSAGE value="表结构脚本" />
     <MESSAGE value="Get请求参数 日期类型处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="Get请求参数 日期类型处理" />
+    <MESSAGE value="分布式锁来控制 医生在某田某个时间段 预约人数的控制。添加了联合索引防止并发入库" />
+    <option name="LAST_COMMIT_MESSAGE" value="分布式锁来控制 医生在某田某个时间段 预约人数的控制。添加了联合索引防止并发入库" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -917,6 +943,26 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/tian/controller/StorageInOrderController.java</url>
           <line>104</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.10.RELEASE/spring-context-5.1.10.RELEASE-sources.jar!/org/springframework/scheduling/annotation/AbstractAsyncConfiguration.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.10.RELEASE/spring-aop-5.1.10.RELEASE.jar!/org/springframework/aop/interceptor/AsyncExecutionAspectSupport.class</url>
+          <line>78</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tian/service/impl/MenuServiceImpl.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tian/controller/MenuController.java</url>
+          <line>148</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/templates/cao/Ctoll.html</url>

@@ -38,7 +38,7 @@
     from department_info
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap" >
         select id, department_name, operation_user_id, `status`, create_time, update_time
         from department_info
         where `status` =0
