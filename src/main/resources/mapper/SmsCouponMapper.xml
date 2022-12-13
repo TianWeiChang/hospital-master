@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mapper.SmsCouponMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.entity.SmsCoupon" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="per_limit" property="perLimit" jdbcType="INTEGER" />
+    <result column="min_point" property="minPoint" jdbcType="DECIMAL" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="use_type" property="useType" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="publish_count" property="publishCount" jdbcType="INTEGER" />
+    <result column="use_count" property="useCount" jdbcType="INTEGER" />
+    <result column="receive_count" property="receiveCount" jdbcType="INTEGER" />
+    <result column="enable_time" property="enableTime" jdbcType="TIMESTAMP" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="member_level" property="memberLevel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sms_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tian.entity.SmsCoupon" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sms_coupon (`type`, `name`, platform, 
+      `count`, amount, per_limit, 
+      min_point, start_time, end_time, 
+      use_type, note, publish_count, 
+      use_count, receive_count, enable_time, 
+      code, member_level)
+    values (#{type,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{platform,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{perLimit,jdbcType=INTEGER}, 
+      #{minPoint,jdbcType=DECIMAL}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{useType,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, #{publishCount,jdbcType=INTEGER}, 
+      #{useCount,jdbcType=INTEGER}, #{receiveCount,jdbcType=INTEGER}, #{enableTime,jdbcType=TIMESTAMP}, 
+      #{code,jdbcType=VARCHAR}, #{memberLevel,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tian.entity.SmsCoupon" >
+    update sms_coupon
+    set `type` = #{type,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=INTEGER},
+      `count` = #{count,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      per_limit = #{perLimit,jdbcType=INTEGER},
+      min_point = #{minPoint,jdbcType=DECIMAL},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      use_type = #{useType,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      publish_count = #{publishCount,jdbcType=INTEGER},
+      use_count = #{useCount,jdbcType=INTEGER},
+      receive_count = #{receiveCount,jdbcType=INTEGER},
+      enable_time = #{enableTime,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      member_level = #{memberLevel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, `type`, `name`, platform, `count`, amount, per_limit, min_point, start_time, 
+    end_time, use_type, note, publish_count, use_count, receive_count, enable_time, code, 
+    member_level
+    from sms_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, `type`, `name`, platform, `count`, amount, per_limit, min_point, start_time, 
+    end_time, use_type, note, publish_count, use_count, receive_count, enable_time, code, 
+    member_level
+    from sms_coupon
+  </select>
+</mapper>
